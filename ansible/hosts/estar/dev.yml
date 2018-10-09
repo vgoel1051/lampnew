@@ -1,0 +1,16 @@
+all:
+  children:
+    dev:
+      children:
+        estar_all:
+          children:
+            estar_dev:
+              children:
+                dbservers:
+                  hosts:
+                    db:
+                      ansible_connection: local
+                webservers:
+                  hosts:
+                    web:
+                      ansible_connection: local

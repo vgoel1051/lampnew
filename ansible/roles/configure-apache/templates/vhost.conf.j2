@@ -1,0 +1,56 @@
+<VirtualHost *:80>
+
+    ServerAdmin webmaster@{{ item[1].domain_name }}
+    ServerName {{ item[1].domain_name }}
+    ServerAlias {{ shop_subdomain }}.{{ item[1].domain_name }}
+    DocumentRoot {{ item[0].document_root }}
+
+    <Directory {{ item[0].document_root }}>
+        Options Indexes FollowSymLinks MultiViews
+        # changed from None to FileInfo
+        AllowOverride All
+        Order allow,deny
+        allow from all
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+{% if enable_ssl %}
+
+<IfModule mod_ssl.c>
+
+    <VirtualHost *:443>
+
+        ServerAdmin webmaster@{{ item[1].domain_name }}
+        ServerName {{ item[1].domain_name }}
+        ServerAlias {{ shop_subdomain }}.{{ item[1].domain_name }}
+        DocumentRoot {{ item[0].document_root }}
+
+        SSLEngine on
+
+        SSLCertificateFile {{ ssl_certificate_directory }}/{{ item[1].domain_name }}/ssl_certificate.crt
+        SSLCertificateKeyFile {{ ssl_certificate_directory }}/{{ item[1].domain_name }}/{{ item[1].domain_name | replace('.', '_') }}.key
+
+        SSLCACertificateFile {{ ssl_certificate_directory }}/IntermediateCA.crt
+        SSLUseStapling on
+
+        <Directory {{ item[0].document_root }}>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    </VirtualHost>
+
+</IfModule>
+
+{% endif %}
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet

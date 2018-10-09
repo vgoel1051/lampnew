@@ -1,0 +1,3 @@
+- name: Allow root login remotely
+  command: "mysql -NBe \"GRANT ALL ON *.* to root@'%' IDENTIFIED BY '{{ mysql_root_password }}'\""
+  when: allow_mysql_root_login

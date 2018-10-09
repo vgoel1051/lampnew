@@ -1,0 +1,2 @@
+#php_session_save_handler: redis
+#php_session_save_path: "tcp://172.16.20.235:6379?auth=DaP19mevEfpOai87egf8"

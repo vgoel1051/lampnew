@@ -1,0 +1,4 @@
+mysql_root_password_update: yes
+mysql_user_password_update: yes
+
+allow_mysql_root_login: false

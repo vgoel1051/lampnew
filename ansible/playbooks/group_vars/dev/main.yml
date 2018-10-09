@@ -1,0 +1,8 @@
+# dbservers
+allow_mysql_root_login: true
+mysql_root_password: root
+
+# webservers
+enable_xdebug: true
+enable_ssl: false
+shop_subdomain: dev

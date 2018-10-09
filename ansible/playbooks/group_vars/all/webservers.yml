@@ -1,0 +1,69 @@
+enable_ssl: yes
+ssl_certificate_directory: /etc/apache2/ssl
+shop_subdomain: www
+
+# PHP
+
+php_webserver_daemon: apache2
+
+# See https://github.com/geerlingguy/drupal-vm/issues/971
+php_enable_apc: false
+
+php_conf_paths:
+  - /etc/php/5.6/fpm
+  - /etc/php/5.6/apache2
+  - /etc/php/5.6/cli
+
+php_extension_conf_paths:
+  - /etc/php/5.6/fpm/conf.d
+  - /etc/php/5.6/apache2/conf.d
+  - /etc/php/5.6/cli/conf.d
+
+php_packages:
+  - php5.6
+  - php-pear
+  - libapache2-mod-php5.6
+  - php5.6-bcmath
+  - php5.6-cli
+  - php5.6-common
+  - php5.6-curl
+  - php5.6-dev
+  - php5.6-fpm
+  - php5.6-gd
+  - php5.6-imap
+  - php5.6-imagick
+  - php5.6-intl
+  - php5.6-json
+  - php5.6-mbstring
+  - php5.6-mcrypt
+  - php5.6-memcache
+  - php5.6-mysql
+  - php5.6-soap
+  - php5.6-sqlite3
+  - php5.6-tideways
+  - php5.6-tidy
+  - php5.6-xml
+  - php5.6-xmlrpc
+  - php5.6-xsl
+
+php_date_timezone: "Europe/Berlin"
+
+php_xdebug_version: 2.5.0
+php_xdebug_default_enable: 0
+php_xdebug_coverage_enable: 0
+
+php_xdebug_remote_enable: 1
+php_xdebug_remote_host: "{{ lookup('env','HOST_IP') }}"
+php_xdebug_remote_autostart: 1
+php_xdebug_remote_connect_back: 0
+php_xdebug_idekey: PHPSTORM
+
+enable_xdebug: false
+
+php_zend_guard_download_link: http://www.zend.com/en/download/4723
+
+# Apache
+
+apache_service: apache2
+apache_create_vhosts: false
+apache_remove_default_vhost: true

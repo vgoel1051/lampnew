@@ -1,0 +1,41 @@
+- name: Ensure SSL directory present
+  file:
+    path: "{{ ssl_certificate_directory }}"
+    state: directory
+  when: enable_ssl
+
+- name: Copy IntermediateCA SSL certificate
+  copy:
+    src: "{{ playbook_dir }}/../ssl/IntermediateCA.crt"
+    dest: "{{ ssl_certificate_directory }}"
+  when: enable_ssl
+
+- name: Copy SSL certificates and keys
+  synchronize:
+    src: "{{ playbook_dir }}/../ssl/{{ item.1.domain_name }}"
+    dest: "{{ ssl_certificate_directory }}"
+  with_subelements:
+    - "{{ malls }}"
+    - shops
+  when: enable_ssl
+
+- name: Add virtual host configs
+  template:
+    src: vhost.conf.j2
+    dest: "/etc/apache2/sites-available/{{ item.1.domain_name }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+  with_subelements:
+      - "{{ malls }}"
+      - shops
+  notify:
+    - restart apache
+
+- name: Enable virtual hosts
+  command: a2ensite {{ item[1].domain_name }}
+  with_subelements:
+      - "{{ malls }}"
+      - shops
+  notify:
+    - restart apache

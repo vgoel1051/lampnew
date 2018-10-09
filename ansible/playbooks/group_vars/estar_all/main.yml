@@ -1,0 +1,10 @@
+# dbservers
+mysql_databases:
+  - name: estar
+
+# webservers
+malls:
+  - document_root: /var/www/estar/htdocs
+    shops:
+    - domain_name: elektronik-star.de
+    - domain_name: elektronik-star.it

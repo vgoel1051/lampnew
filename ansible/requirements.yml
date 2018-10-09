@@ -1,0 +1,19 @@
+- name: mysql
+  src: geerlingguy.mysql
+  version: 2.9.0
+
+- name: apache
+  src: geerlingguy.apache
+  version: 3.0.0
+
+- name: php
+  src: geerlingguy.php
+  version: 3.6.0
+
+- name: composer
+  src: geerlingguy.composer
+  version: 1.7.0
+
+- name: xdebug
+  src: geerlingguy.php-xdebug
+  version: 2.5.0  

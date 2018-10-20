@@ -1,0 +1,74 @@
+---
+
+- hosts: localhost
+  gather_facts: true
+  tasks: 
+
+    - name: Execute the command in remote shell;
+      shell:  whoami
+      register: out
+    - debug: var=out.stdout_lines
+
+    - name: clone certificates Repo
+      git:
+        repo: git@LNAPP01:dev-ops/ShopCertificates.git
+        version: master
+        dest: /opt/private-repo/
+        accept_hostkey: yes
+
+
+- hosts: web
+  become_method: sudo
+  vars_files:
+    - "environments/{{ env }}/group_vars/webserver.yml"
+
+  vars:    
+    http_port: 80
+    domain: example.com
+    vhost_sites:
+      - {domain: "elektronik-star.de", mall: "estar"}
+      - {domain: "electronic-star.sk", mall: "sk"}
+
+  remote_user: devop
+
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+    - name: apache2 listen on port {{ http_port }}
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
+      notify:
+        - restart apache2
+
+    - name: a2ensite {{ domain }}
+      command: a2ensite {{ domain }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ domain }}.conf
+      notify:
+        - restart apache2
+
+    - name: Copy SSL folder to server.
+      copy:
+        src: /opt/private-repo/ssl
+        dest: /etc/apache2/
+        mode: 0600
+        owner: www-data
+        group: www-data
+
+    - service:
+        name: apache2
+        state: started
+      become: yes
+      become_method: sudo
+
+  roles:
+    - webservers
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted

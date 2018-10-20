@@ -1,5 +1,0 @@
-php_zend_guard_extension_directory: /root
-
-php_zend_guard_archive_file_name: zend-loader-php5.6-linux-x86_64_update1.tar.gz
-
-php_zend_guard_config_filename: 20-zend-guard-loader.ini

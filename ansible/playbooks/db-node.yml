@@ -1,8 +1,0 @@
----
-- name: "Provision database nodes"
-  hosts: dbservers
-  become: yes
-  roles:
-    - { role: common, tags: [common] }
-    - { role: mysql, tags: [mysql] }
-    - { role: configure-db, tags: [configure-db] }

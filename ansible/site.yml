@@ -25,9 +25,49 @@
   vars:    
     http_port: 80
     domain: example.com
-    vhost_sites:
-      - {domain: "elektronik-star.de", mall: "estar"}
-      - {domain: "electronic-star.sk", mall: "sk"}
+    vhost_sites:       
+        - {domain: "auna.de", mall: "estar"}
+        - {domain: "auna.fr", mall: "estar"}
+        - {domain: "auna.it", mall: "estar"}
+        - {domain: "auna-multimedia.co.uk", mall: "estar"}
+        - {domain: "auna-multimedia.com", mall: "estar"}
+        - {domain: "auna-multimedia.es", mall: "estar"}
+        - {domain: "capitalsports.de", mall: "estar"}
+        - {domain: "electronic-star.be", mall: "estar"}
+        - {domain: "electronic-star.bg", mall: "estar"}
+        - {domain: "electronic-star.ch", mall: "estar"}
+        - {domain: "electronic-star.cz", mall: "estar"}
+        - {domain: "electronic-star.es", mall: "estar"}
+        - {domain: "electronic-star.fi", mall: "estar"}
+        - {domain: "electronic-star.fr", mall: "estar"}
+        - {domain: "electronic-star.hr", mall: "estar"}
+        - {domain: "electronic-star.hu", mall: "estar"}
+        - {domain: "electronic-star.it", mall: "estar"}
+        - {domain: "electronic-star.nl", mall: "estar"}
+        - {domain: "electronic-star.pl", mall: "estar"}
+        - {domain: "electronic-star.pt", mall: "estar"}
+        - {domain: "electronic-star.ro", mall: "estar"}
+        - {domain: "electronic-star.se", mall: "estar"}
+        - {domain: "electronic-star.si", mall: "estar"}
+        - {domain: "electronic-star.sk", mall: "estar"}
+        - {domain: "elektronik-star.at", mall: "estar"}
+        - {domain: "elektronik-star.de", mall: "estar"}
+        - {domain: "hifi-tower.co.uk", mall: "estar"}
+        - {domain: "hifi-tower.ie", mall: "estar"}
+        - {domain: "klarstein.bg", mall: "estar"}
+        - {domain: "klarstein.co.uk", mall: "estar"}
+        - {domain: "klarstein.com", mall: "estar"}
+        - {domain: "klarstein.cz", mall: "estar"}
+        - {domain: "klarstein.de", mall: "estar"}
+        - {domain: "klarstein.es", mall: "estar"}
+        - {domain: "klarstein.fr", mall: "estar"}
+        - {domain: "klarstein.hr", mall: "estar"}
+        - {domain: "klarstein.hu", mall: "estar"}
+        - {domain: "klarstein.it", mall: "estar"}
+        - {domain: "klarstein.ro", mall: "estar"}
+        - {domain: "klarstein.si", mall: "estar"}
+        - {domain: "klarstein.sk", mall: "estar"}
+        - {domain: "numanaudio.com", mall: "estar"}
 
   remote_user: devop
 

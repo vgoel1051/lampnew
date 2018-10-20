@@ -61,12 +61,12 @@
         - {domain: "klarstein.de", mall: "estar"}
         - {domain: "klarstein.es", mall: "estar"}
         - {domain: "klarstein.fr", mall: "estar"}
-        - {domain: "klarstein.hr", mall: "estar"}
+        - {domain: "klarstein.hr", mall: "sk"}
         - {domain: "klarstein.hu", mall: "estar"}
         - {domain: "klarstein.it", mall: "estar"}
-        - {domain: "klarstein.ro", mall: "estar"}
-        - {domain: "klarstein.si", mall: "estar"}
-        - {domain: "klarstein.sk", mall: "estar"}
+        - {domain: "klarstein.ro", mall: "sk"}
+        - {domain: "klarstein.si", mall: "sk"}
+        - {domain: "klarstein.sk", mall: "sk"}
         - {domain: "numanaudio.com", mall: "estar"}
 
   remote_user: devop

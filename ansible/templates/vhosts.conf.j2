@@ -16,6 +16,8 @@
 </VirtualHost>
 
 <IfModule mod_ssl.c>
+	SSLStaplingCache shmcb:/tmp/stapling_cache(128000)
+
     <VirtualHost *:443>
 
 	ServerAdmin webmaster@{{ item.domain }}
@@ -26,7 +28,7 @@
 	SSLEngine on
 
 	SSLCertificateFile /etc/apache2/ssl/{{ item.domain }}/ssl_certificate.crt
-	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.domain }}/electronic-star_sk.key
+	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.domain }}/{{ item.domain }}.key
 
 	SSLCACertificateFile /etc/apache2/ssl/IntermediateCA.crt
 	SSLUseStapling on

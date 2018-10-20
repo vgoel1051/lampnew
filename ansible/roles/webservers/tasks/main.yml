@@ -18,10 +18,12 @@
         dest: /etc/apache2/sites-available/{{ subdomain }}.{{ item['domain'] }}.conf
       with_items: "{{ vhost_sites }}"
       
+           
     - name: a2ensite {{ subdomain }}.{{ item['domain'] }}
       command: a2ensite {{ subdomain }}.{{ item['domain'] }}
       args:
-        creates: /etc/apache2/sites-enabled/{{ subdomain }}.{{ item['domain'] }}.conf
+        creates: /etc/apache2/sites-enabled/{{ subdomain }}.{{ item['domain'] }}}.conf
+      with_items: "{{ vhost_sites }}"
       notify:
-        - restart apache2
-      
+      - restart apache2
+          

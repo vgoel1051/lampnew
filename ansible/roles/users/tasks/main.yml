@@ -1,0 +1,53 @@
+---
+ - name: Create a login user
+   user:
+     name: "{{ item.name }}"
+     password: "{{ item.pass }}"
+     update_password: on_create     
+     groups: www-data,sudo   
+     state: present
+     shell: /bin/bash     
+     createhome: yes        
+     home: /home/{{ item.name }}  # Defaults to /home/{{ item.name }}
+     append: yes
+   with_items: "{{ consoleusers }}"
+   
+ - name: Add .ssh directories
+   file:
+     path=/home/{{ item.name }}/.ssh
+     state=directory
+     mode=0700
+     owner={{ item.name }}
+     group={{ item.name }}  
+   with_items: "{{ consoleusers }}"
+   
+ - name: Copy id_rsa.pub file
+   copy: 
+     content: "{{ item.pubkey }}"
+     dest: /home/{{ item.name }}/.ssh/id_rsa.pub
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0600'
+     backup: yes
+   with_items: "{{ consoleusers }}"
+    
+ - name: Copy authorized_keys file
+   copy: 
+     content: "{{ item.authorizedkeys }}"
+     dest: /home/{{ item.name }}/.ssh/authorized_keys
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0600'
+     backup: yes
+   with_items: "{{ consoleusers }}"
+   
+ - name: Copy id_rsa file
+   copy: 
+     content: "{{ item.privkey }}"
+     dest: /home/{{ item.name }}/.ssh/id_rsa
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0600'
+     backup: yes
+   with_items: "{{ consoleusers }}"   
+ 

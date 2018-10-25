@@ -1,0 +1,3 @@
+---
+ - name: Turn On Color Prompt
+   lineinfile: dest=~{{ console_user }}/.bashrc line="force_color_prompt=yes" regexp='#?force_color_prompt=yes' state=present

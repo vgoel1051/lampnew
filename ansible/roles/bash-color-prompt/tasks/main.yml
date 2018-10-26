@@ -1,3 +1,4 @@
 ---
  - name: Turn On Color Prompt
-   lineinfile: dest=~{{ console_user }}/.bashrc line="force_color_prompt=yes" regexp='#?force_color_prompt=yes' state=present
+   lineinfile: dest=~{{ item.name }}/.bashrc line="force_color_prompt=yes" regexp='#?force_color_prompt=yes' state=present
+   with_items: "{{ consoleusers }}"

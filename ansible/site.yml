@@ -3,7 +3,6 @@
 - hosts: all
   vars:    
     http_port: 80
-    console_user: deployjenkins
     mysql_user: deployjenkins
   roles:
     - users
@@ -12,7 +11,6 @@
 - hosts: productiondbservers
   vars:    
     http_port: 80
-    console_user: deployjenkins
     mysql_user: deployjenkins
   roles:
     - mysql
@@ -21,7 +19,6 @@
 - hosts: productionwebservers
   vars:    
     http_port: 80
-    console_user: deployjenkins
     mysql_user: deployjenkins
   roles:
     - apache-2
@@ -32,7 +29,6 @@
 - hosts: stagedbservers
   vars:    
     http_port: 80
-    console_user: deployjenkins
     mysql_user: deployjenkins
   roles:
     - mysql
@@ -41,7 +37,6 @@
 - hosts: stagewebservers
   vars:    
     http_port: 80
-    console_user: deployjenkins
     mysql_user: deployjenkins
   roles:
     - apache-2

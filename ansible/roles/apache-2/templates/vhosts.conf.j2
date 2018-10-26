@@ -2,7 +2,7 @@
 
     ServerAdmin webmaster@{{ item.domain }}
     ServerName {{ item.domain }}
-    ServerAlias www.{{ item.domain }}
+    ServerAlias {{ subdomain }}.{{ item.domain }}
     DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs
 
     <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
@@ -22,7 +22,7 @@
 
 	ServerAdmin webmaster@{{ item.domain }}
 	ServerName {{ item.domain }}
-	ServerAlias www.{{ item.domain }}
+	ServerAlias {{ subdomain }}.{{ item.domain }}
 	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
 
 	SSLEngine on

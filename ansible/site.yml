@@ -1,43 +1,29 @@
 ---
 
 - hosts: all
-  vars:    
-    http_port: 80
-    mysql_user: deployjenkins
   roles:
     - users
     - bash-color-prompt
     
 - hosts: productiondbservers
-  vars:    
-    http_port: 80
-    mysql_user: deployjenkins
   roles:
     - mysql
-
 
 - hosts: productionwebservers
   vars:    
     http_port: 80
-    mysql_user: deployjenkins
   roles:
     - apache-2
     - php-5-7
-    - zendguard
+    - zendguard    
     
-    
-- hosts: stagedbservers
-  vars:    
-    http_port: 80
-    mysql_user: deployjenkins
+- hosts: stagedbservers   
   roles:
     - mysql
-
 
 - hosts: stagewebservers
   vars:    
     http_port: 80
-    mysql_user: deployjenkins
   roles:
     - apache-2
     - php-5-7

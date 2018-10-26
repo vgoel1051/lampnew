@@ -14,7 +14,7 @@
     http_port: 80
   roles:
     - apache-2
-    - php-5-7
+    - php-5-6
     - zendguard    
     
 - hosts: stagedbservers   
@@ -26,6 +26,6 @@
     http_port: 80
   roles:
     - apache-2
-    - php-5-7
+    - php-5-6
     - zendguard
     

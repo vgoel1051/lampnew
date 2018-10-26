@@ -1,0 +1,69 @@
+# Setup/install tasks.
+---
+
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+ 
+- name: PHP | Install Ondrej PHP PPA
+  apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+- name: PHP | Install PHP 5.6
+  apt: pkg=php5.6 state=latest
+  tags: common
+
+- name: install packages
+  apt: name={{ item }} update_cache=yes state=latest
+  with_items:
+  - php-pear
+  - libapache2-mod-php5.6
+  - php5.6-bcmath
+  - php5.6-cli
+  - php5.6-common
+  - php5.6-curl
+  - php5.6-dev
+  - php5.6-fpm
+  - php5.6-gd
+  - php5.6-imap
+  - php5.6-imagick
+  - php5.6-intl
+  - php5.6-json
+  - php5.6-mbstring
+  - php5.6-mcrypt
+  - php5.6-memcache
+  - php5.6-mysql
+  - php5.6-soap
+  - php5.6-sqlite3
+  - php5.6-tidy
+  - php5.6-xml
+  - php5.6-xmlrpc
+  - php5.6-xsl
+  
+#- name: Ensure PHP packages are installed.
+#  apt:
+#    name: "{{ php_packages }}"
+#    state: "{{ php_packages_state }}"
+#    install_recommends: "{{ php_install_recommends }}"
+#  register: php_package_install
+#  notify: restart webserver
+#
+#- name: Delete APCu configuration file if this role will provide one.
+#  file:
+#    path: "{{ item }}/{{ php_apc_conf_filename }}"
+#    state: absent
+#  with_items: "{{ php_extension_conf_paths }}"
+#  when: php_enable_apc and php_package_install.changed
+#  notify: restart webserver
+#
+#- name: Delete OpCache configuration file if this role will provide one.
+#  file:
+#    path: "{{ item }}/{{ php_opcache_conf_filename }}"
+#    state: absent
+#  with_items: "{{ php_extension_conf_paths }}"
+#  when: php_opcache_enable and php_package_install.changed
+#  notify: restart webserver
+
+# Configure PHP.
+#- include_tasks: configure.yml
+#- include_tasks: configure-apcu.yml
+#- include_tasks: configure-opcache.yml
+#- include_tasks: configure-fpm.yml

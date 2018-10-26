@@ -30,15 +30,6 @@
      group: "{{ item.name }}"
      mode: '0600'
    with_items: "{{ consoleusers }}"
-    
- - name: Copy authorized_keys file
-   copy: 
-     content: "{{ item.authorizedkeys }}"
-     dest: /home/{{ item.name }}/.ssh/authorized_keys
-     owner: "{{ item.name }}"
-     group: "{{ item.name }}"
-     mode: '0600'
-   with_items: "{{ consoleusers }}"
    
  - name: Copy id_rsa file
    copy: 
@@ -48,4 +39,12 @@
      group: "{{ item.name }}"
      mode: '0600'
    with_items: "{{ consoleusers }}"   
- 
+      
+# - name: Copy authorized_keys file
+#   copy: 
+#     content: "{{ item.authorizedkeys }}"
+#     dest: /home/{{ item.name }}/.ssh/authorized_keys
+#     owner: "{{ item.name }}"
+#     group: "{{ item.name }}"
+#     mode: '0600'
+#   with_items: "{{ consoleusers }}"

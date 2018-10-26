@@ -29,7 +29,6 @@
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0600'
-     backup: yes
    with_items: "{{ consoleusers }}"
     
  - name: Copy authorized_keys file
@@ -39,7 +38,6 @@
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0600'
-     backup: yes
    with_items: "{{ consoleusers }}"
    
  - name: Copy id_rsa file
@@ -49,6 +47,5 @@
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0600'
-     backup: yes
    with_items: "{{ consoleusers }}"   
  

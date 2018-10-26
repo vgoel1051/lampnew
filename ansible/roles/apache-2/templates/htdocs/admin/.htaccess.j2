@@ -1,0 +1,10 @@
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^"{{ item.admin_domain | replace('.', '\.') }}"$ [NC]
+RewriteRule ^(.*)$ https://{{ item.admin_domain }}/admin [R=301,L]
+
+RewriteCond %{REMOTE_ADDR} !^213.61.70.222$ [NC] AND
+RewriteCond %{REMOTE_ADDR} !^86.110.230.145$ [NC] AND
+RewriteCond %{REMOTE_ADDR} !^217.70.137.146$ [NC]
+
+RewriteRule ^(.*)$ /index.php [R=301,L]

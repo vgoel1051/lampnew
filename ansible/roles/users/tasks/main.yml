@@ -1,4 +1,5 @@
 ---
+ - debug: msg="{{ lookup('env','HOME') }} is an environment variable"
  - name: Create a login user
    user:
      name: "{{ item.name }}"

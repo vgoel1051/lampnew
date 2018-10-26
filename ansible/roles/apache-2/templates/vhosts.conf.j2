@@ -3,9 +3,9 @@
     ServerAdmin webmaster@{{ item.domain }}
     ServerName {{ item.domain }}
     ServerAlias www.{{ item.domain }}
-    DocumentRoot /var/www/malls/{{ env }}/{{ item.mall }}/htdocs
+    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs
 
-    <Directory /var/www/malls/{{ env }}/{{ item.mall }}/htdocs/>
+    <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
 	Options Indexes FollowSymLinks MultiViews
 	# changed from None to FileInfo
 	AllowOverride All
@@ -23,7 +23,7 @@
 	ServerAdmin webmaster@{{ item.domain }}
 	ServerName {{ item.domain }}
 	ServerAlias www.{{ item.domain }}
-	DocumentRoot /var/www/malls/{{ env }}/{{ item.mall }}/htdocs/
+	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
 
 	SSLEngine on
 
@@ -33,7 +33,7 @@
 	SSLCACertificateFile /etc/apache2/ssl/IntermediateCA.crt
 	SSLUseStapling on
 
-	<Directory /var/www/malls/{{ env }}/{{ item.mall }}/htdocs/>
+	<Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
 	    Options Indexes FollowSymLinks MultiViews
 	    AllowOverride All
 	    Order allow,deny

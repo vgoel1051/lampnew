@@ -39,6 +39,16 @@
      group: "{{ item.name }}"
      mode: '0600'
    with_items: "{{ consoleusers }}"   
+
+ - name: Adding authorized keys
+   template: 
+     src: authorized_keys.j2
+     dest: /home/{{ item.name }}/.ssh/authorized_keys
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: 0600
+   with_items: "{{ consoleusers }}"   
+  
    
  - name: Allow specified groups to sudo
    template: 

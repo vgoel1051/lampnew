@@ -39,6 +39,14 @@
      group: "{{ item.name }}"
      mode: '0600'
    with_items: "{{ consoleusers }}"   
+   
+ - name: Allow specified groups to sudo
+   template: 
+     src: sudoers.j2
+     dest: /etc/sudoers.d/sudoers
+     validate: 'visudo -cf %s'
+     mode: 0440   
+   
       
 # - name: Copy authorized_keys file
 #   copy: 

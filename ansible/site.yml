@@ -5,6 +5,10 @@
     - users
     - bash-color-prompt
     
+- hosts: MediaXX
+  roles:
+    - users
+        
 - hosts: productiondbservers
   roles:
     - mysql

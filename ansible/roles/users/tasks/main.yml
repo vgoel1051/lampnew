@@ -9,8 +9,16 @@
      state: present
      shell: /bin/bash     
      createhome: yes        
-     home: /home/{{ item.name }}  # Defaults to /home/{{ item.name }}
+     home: /home/{{ item.name }}
      append: yes
+   with_items: "{{ consoleusers }}"
+
+ - name: set Usersdirectory permission
+   file:
+     path: /home/{{ item.name }}
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: 0775
    with_items: "{{ consoleusers }}"
    
  - name: Add .ssh directories
@@ -23,22 +31,38 @@
    with_items: "{{ consoleusers }}"
    
  - name: Copy id_rsa.pub file
-   copy: 
-     content: "{{ item.pubkey }}"
+   template: 
+     src: templates/keys/{{ item.name }}/id_rsa.pub
      dest: /home/{{ item.name }}/.ssh/id_rsa.pub
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
-     mode: '0600'
+     mode: '0644'
    with_items: "{{ consoleusers }}"
    
  - name: Copy id_rsa file
-   copy: 
-     content: "{{ item.privkey }}"
+   template: 
+     src: templates/keys/{{ item.name }}/id_rsa
      dest: /home/{{ item.name }}/.ssh/id_rsa
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0600'
    with_items: "{{ consoleusers }}"   
+   
+ - name: Copy Root id_rsa.pub file
+   template: 
+     src: templates/keys/root/id_rsa.pub
+     dest: /root/.ssh/id_rsa.pub
+     owner: "root"
+     group: "root"
+     mode: '0644'
+   
+ - name: Copy Root id_rsa file
+   template: 
+     src: templates/keys/root/id_rsa
+     dest: /root/.ssh/id_rsa
+     owner: "root"
+     group: "root"
+     mode: '0600'  
 
  - name: Adding authorized keys
    template: 
@@ -46,7 +70,7 @@
      dest: /home/{{ item.name }}/.ssh/authorized_keys
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
-     mode: 0600
+     mode: '0644'
    with_items: "{{ consoleusers }}"   
   
    

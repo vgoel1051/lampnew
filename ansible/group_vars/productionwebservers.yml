@@ -1,7 +1,0 @@
- stage: "prod"
- subdomain: "www"
- malls:
-      - {admin_domain: "shop-apc.elektronik-star.de", mall: "estar"}
-      - {admin_domain: "shop-apc.auna.com", mall: "auna"} 
-      - {admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk"}     
-      - {admin_domain: "shop-apc-cs.elektronik-star.de", mall: "capitalsports"}

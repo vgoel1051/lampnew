@@ -1,24 +1,27 @@
-[MediaXX]
-88.99.241.51
+#[MediaXX]
+#88.99.241.51
 
 [1und1-prod-webservers]
-212.227.9.143 
+82.165.68.238 
 
 [dnsnet-prod-webservers]
 10.100.5.116
 10.100.5.118
 
 [1und1-prod-dbservers]
-212.227.9.143 
+217.160.11.145
+82.165.74.21
+82.165.68.59
+82.165.69.91
 
 [dnsnet-prod-dbservers]
-10.100.5.116
+#10.100.5.116
 
 [dnsnet-stage-webservers]
 10.100.5.117
 
 [dnsnet-stage-dbservers]
-#212.227.9.143 
+10.100.5.116
 
 [productionwebservers:children]
 1und1-prod-webservers

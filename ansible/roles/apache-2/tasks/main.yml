@@ -1,23 +1,29 @@
 ---
+    - include: copyCerts.yml
+
     - name: install apache2
       apt: name=apache2 update_cache=yes state=latest
-
+      tags: apache2
+      
     - name: enabled mod_rewrite
       apache2_module: name=rewrite state=present
       notify:
         - restart apache2
-
+      tags: apache2
+      
     - name: apache2 listen on port {{ http_port }}
       lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
       notify:
         - restart apache2
-
+      tags: apache2
+      
     - name: Create apache2 vhosts
       template:
         src: templates/vhosts.conf.j2
         dest: /etc/apache2/sites-available/{{ subdomain }}.{{ item['domain'] }}.conf
       with_items: "{{ vhost_sites }}"      
-           
+      tags: apache2
+      
     - name: a2ensite {{ subdomain }}.{{ item['domain'] }}
       command: a2ensite {{ subdomain }}.{{ item['domain'] }}
       args:
@@ -25,13 +31,15 @@
       with_items: "{{ vhost_sites }}"
       notify:
       - restart apache2  
-
+      tags: apache2
+      
     - name: Create apache2 admin vhosts
       template:
         src: templates/vhostsAdmin.conf.j2
         dest: /etc/apache2/sites-available/{{ item['admin_domain'] }}.conf
       with_items: "{{ malls }}"      
-            
+      tags: apache2
+      
     - name: a2ensite {{ item['admin_domain'] }}
       command: a2ensite {{ item['admin_domain'] }}
       args:
@@ -39,6 +47,18 @@
       with_items: "{{ malls }}"
       notify:
       - restart apache2
+      tags: apache2
+      
+    - name: Create sqlDumps directory
+      file:
+        path: /var/www/malls/{{ stage }}/sqlDumps
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: apache2
       
     - name: Create target apache2 admin.htaccess directory
       file:
@@ -49,17 +69,20 @@
         mode: 0775
         recurse: yes
       with_items: "{{ malls }}"
-  
+      tags: apache2
+      
     - name: Create apache2 .htaccess
       template:
         src: templates/htdocs/.htaccess.j2
         dest: /var/www/malls/{{ stage }}/{{ item.mall}}/htdocs/.htaccess  
         mode: 0775        
       with_items: "{{ malls }}"       
-
+      tags: apache2
+      
     - name: Create apache2 admin .htaccess
       template:
         src: templates/htdocs/admin/.htaccess.j2
         dest: /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin/.htaccess
         mode: 0775
-      with_items: "{{ malls }}"        
+      with_items: "{{ malls }}"
+      tags: apache2

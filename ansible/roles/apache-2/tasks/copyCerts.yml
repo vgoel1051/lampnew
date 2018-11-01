@@ -1,0 +1,23 @@
+---
+
+    - name: Create ssl directory
+      file:
+        path:  /etc/apache2/ssl
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: apache2
+        
+    - name: copy ssl directory
+      copy: 
+        src: /var/www/ShopCertificates/ssl 
+        dest: /etc/apache2/
+        owner: www-data
+        group: www-data
+        mode: 0775
+        remote_src: no
+        directory_mode: yes  
+      tags: apache2

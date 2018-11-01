@@ -1,0 +1,21 @@
+---
+# tasks file for mysql
+
+ - name: Install required software
+   apt: name={{ item }} state=present
+   sudo: yes
+   with_items:
+     - build-essential
+     - python-dev
+     - python-mysqldb
+   tags: mysql
+   
+ - name: Install the MySQL packages
+   apt: name={{ item }} state=installed update_cache=yes
+   with_items:
+     - mysql-server
+     - mysql-client
+     - python-mysqldb
+     - libmysqlclient-dev
+   tags: mysql
+

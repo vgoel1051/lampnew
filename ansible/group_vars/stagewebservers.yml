@@ -1,8 +1,0 @@
- stage: "stage"
- subdomain: "stage"
- malls:
-      - {admin_domain: "stage-shop-apc.elektronik-star.de", mall: "estar"}
-      - {admin_domain: "stage-shop-apc.auna.com", mall: "auna"} 
-      - {admin_domain: "stage-shop-apc-sk.elektronik-star.de", mall: "sk"}     
-      - {admin_domain: "stage-shop-apc-cs.elektronik-star.de", mall: "capitalsports"}
-      

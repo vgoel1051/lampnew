@@ -1,0 +1,10 @@
+---
+    - name: Clone ShopCertificates repo
+      git:
+        repo: git@192.168.13.96:dev-ops/ShopCertificates.git
+        dest: /var/www/ShopCertificates/
+        version: master
+        accept_hostkey: yes
+        key_file: /home/devop/.ssh/id_rsa
+      become: true      
+      tags: apache2

@@ -2,12 +2,13 @@
  - name: Install a list of packages
    apt:
      name: "{{ packages }}"
+     update_cache: yes
    vars:
      packages:
      - mc
      - htop
      - iftop
-   update_cache: yes
+     - rsync
    
  - debug: msg="{{ lookup('env','HOME') }} is an environment variable"
  - name: Create a login user

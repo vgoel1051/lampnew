@@ -19,3 +19,8 @@
      - libmysqlclient-dev
    tags: mysql
 
+ - name: bind mysql remote address
+   ini_file: dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+             section=mysqld
+             option=bind-address
+             value='0.0.0.0'

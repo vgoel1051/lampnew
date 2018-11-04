@@ -1,16 +1,51 @@
 ---
     - include: copyCerts.yml
+    - include: shopadmin.yml
+    - include: erpcon.yml
+ 
+    - name: PHP | Install Ondrej PHP PPA
+      apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+
+    - name: install software-properties-common
+      apt: name=software-properties-common update_cache=yes state=latest
+      tags: apache2
 
     - name: install apache2
       apt: name=apache2 update_cache=yes state=latest
       tags: apache2
-      
-    - name: enabled mod_rewrite
+
+    - name: deactivate apache2 module
+      apache2_module: name=php5.6 state=absent
+      notify:
+        - restart apache2
+      with_items: 
+        - php5.6
+        - mpm_prefork
+        - mpm_worker
+      tags: apache2
+
+    - name: Enable override configurations
+      become: yes
+      command: a2enconf php5.6-fpm
+      notify: reload apache
+
+    - name: activate apache2 module
       apache2_module: name=rewrite state=present
       notify:
         - restart apache2
-      tags: apache2
-      
+      with_items: 
+        - setenvif
+        - rewrite
+        - ssl
+        - http2    
+        - proxy_fcgi 
+        - proxy 
+        - proxy_http 
+        - expires
+        - headers 
+        - rewrite
+        - mpm_event      
     - name: apache2 listen on port {{ http_port }}
       lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
       notify:
@@ -33,22 +68,7 @@
       - restart apache2  
       tags: apache2
       
-    - name: Create apache2 admin vhosts
-      template:
-        src: templates/vhostsAdmin.conf.j2
-        dest: /etc/apache2/sites-available/{{ item['admin_domain'] }}.conf
-      with_items: "{{ malls }}"      
-      tags: apache2
-      
-    - name: a2ensite {{ item['admin_domain'] }}
-      command: a2ensite {{ item['admin_domain'] }}
-      args:
-        creates: /etc/apache2/sites-enabled/{{ item['admin_domain'] }}}.conf
-      with_items: "{{ malls }}"
-      notify:
-      - restart apache2
-      tags: apache2
-      
+
     - name: Create sqlDumps directory
       file:
         path: /var/www/malls/{{ stage }}/sqlDumps

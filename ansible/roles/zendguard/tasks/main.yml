@@ -2,7 +2,7 @@
 - copy: src={{ playbook_dir}}/roles/zendguard/module/ZendGuardLoader.so dest=/usr/lib/php/20131226/ remote_src=false
   become: yes
 
-- copy: src={{ playbook_dir}}/roles/zendguard/module/opcache.so dest=/usr/lib/php/20131226/ remote_src=false
+- copy: src={{ playbook_dir}}/roles/zendguard/module/zend_opcache.so dest=/usr/lib/php/20131226/ remote_src=false
   become: yes  
 
 - name: Place ZendGuard configuration

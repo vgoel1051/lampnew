@@ -1,0 +1,48 @@
+<VirtualHost *:80>
+
+    ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
+    ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
+    ServerAlias {{ item.erpcon }}
+    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/
+
+    <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/>
+	Options Indexes FollowSymLinks MultiViews
+	# changed from None to FileInfo
+	AllowOverride All
+	Order allow,deny
+	allow from all
+    </Directory>
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	SSLStaplingCache shmcb:/tmp/stapling_cache(128000)
+
+    <VirtualHost *:443>
+
+    ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
+    ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
+    ServerAlias {{ item.erpcon }}
+	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/
+
+	SSLEngine on
+
+	SSLCertificateFile /etc/apache2/ssl/{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}/ssl_certificate.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}/{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}.key
+
+	SSLCACertificateFile /etc/apache2/ssl/IntermediateCA.crt
+	SSLUseStapling on
+
+	<Directory /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/>
+	    Options Indexes FollowSymLinks MultiViews
+	    AllowOverride All
+	    Order allow,deny
+	    allow from all
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    </VirtualHost>
+
+</IfModule>

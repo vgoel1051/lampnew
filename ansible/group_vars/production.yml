@@ -1,9 +1,9 @@
  stage: "prod"
  subdomain: "www"
  malls:
-      - {admin_domain: "shop-apc.elektronik-star.de", mall: "estar", database: "estarMall", databaseuser: "estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"}
-      - {admin_domain: "shop-apc.auna.de", mall: "auna", database: "aunaMall", databaseuser: "aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"} 
-      - {admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk", database: "skMall", databaseuser: "skMallUser01", databasepass: "Uvhw^134dIw7b1!1"}     
-#      - {admin_domain: "shop-apc-cs.elektronik-star.de", mall: "capitalsports", database: "csMall", databaseuser: "csMallUser01", databasepass: "asevaHak#876"}
-      - {admin_domain: "shop-apc.klarstein.com", mall: "klarstein", database: "klarsteinMall", databaseuser: "klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb"}      
+      - {admin_domain: "shop-apc.elektronik-star.de", erpcon: "erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseuser: "prod_estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"}
+      - {admin_domain: "shop-apc.auna.de", mall: "auna", erpcon: "erp-connector.auna.de",  database: "aunaMall", databaseuser: "prod_aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"} 
+      - {admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk", erpcon: "erp-connector-sk.elektronik-star.de", database: "skMall", databaseuser: "prod_skMallUser01", databasepass: "Uvhw^134dIw7b1!1"}     
+#      - {admin_domain: "shop-apc-cs.elektronik-star.de", erpcon: "erp-connector.cd.elektronik-star.de", mall: "capitalsports", database: "csMall", databaseuser: "prod_csMallUser01", databasepass: "asevaHak#876"}
+      - {admin_domain: "shop-apc.klarstein.com", mall: "klarstein", erpcon: "erp-connector.klarstein.de",  database: "klarsteinMall", databaseuser: "prod_klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb"}      
       

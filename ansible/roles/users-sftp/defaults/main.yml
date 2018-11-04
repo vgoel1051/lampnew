@@ -51,7 +51,7 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_skmall", path: "/var/www/malls/{{ stage }}/klarstein/htdocs"}
+       - {name: "htdocs_klarsteinmall", path: "/var/www/malls/{{ stage }}/klarstein/htdocs"}
        
    - username: estar-sftp
      name: estar-sftp    
@@ -63,7 +63,7 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_skmall", path: "/var/www/malls/{{ stage }}/estar/htdocs"}
+       - {name: "htdocs_estarmall", path: "/var/www/malls/{{ stage }}/estar/htdocs"}
        
    - username: auna-sftp
      name: auna-sftp
@@ -75,7 +75,7 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_skmall", path: "/var/www/malls/{{ stage }}/auna/htdocs"}
+       - {name: "htdocs_aunamall", path: "/var/www/malls/{{ stage }}/auna/htdocs"}
         
 sftp_users_group: ftp
 # default user groups

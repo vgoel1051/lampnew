@@ -30,7 +30,7 @@
 	SSLCertificateFile /etc/apache2/ssl/{{ item.domain }}/ssl_certificate.crt
 	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.domain }}/{{ item.domain }}.key
 
-	SSLCACertificateFile /etc/apache2/ssl/IntermediateCA.crt
+	SSLCACertificateFile etc/apache2/ssl/{{ item.domain }}/IntermediateCA.crt
 	SSLUseStapling on
 
 	<Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>

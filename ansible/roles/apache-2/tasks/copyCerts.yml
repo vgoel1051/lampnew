@@ -11,8 +11,7 @@
       with_items: "{{ malls }}"
       tags: 
       - apache2    
-      - apache2_certs
-        
+      - apache2_certs        
 
     
     # Synchronize two directories on one remote host.

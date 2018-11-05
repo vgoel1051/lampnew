@@ -12,7 +12,8 @@
 - hosts: productiondbservers
   roles:
     - mysql
-
+    - zabbix-agent
+    - hostname
 - hosts: productionwebservers
   vars:    
     http_port: 80
@@ -24,7 +25,9 @@
     - zendguard    
     - erpcon
     - oxidee
-        
+    - zabbix-agent
+    - hostname
+            
 - hosts: stagedbservers   
   roles:
     - mysql

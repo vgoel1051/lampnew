@@ -1,0 +1,52 @@
+# Setup/install tasks.
+---
+
+    - name: " Installing deb-src repository Ubuntu"
+      apt_repository:
+        repo: "deb-src http://repo.zabbix.com/zabbix/3.4/ubuntu/ {{ ansible_distribution_release }} main"
+        state: present
+      when:
+        - ansible_distribution == "Ubuntu"
+      become: yes
+      tags:
+        - zabbix-agent
+        - init
+
+    - name: "Debian | Installing deb repository Ubuntu"
+      apt_repository:
+        repo: "deb http://repo.zabbix.com/zabbix/3.4/ubuntu/ {{ ansible_distribution_release }} main"
+        state: present
+      when:
+        - ansible_distribution == "Ubuntu"
+      become: yes
+      tags:
+        - zabbix-agent
+        - init
+
+    - name: Add an Apt signing key, will not download if present
+      apt_key:
+        id: 79EA5ED4
+        url: http://repo.zabbix.com/zabbix-official-repo.key
+        state: present
+      tags:
+        - zabbix-agent
+        - init
+   
+    - name: 'install zabbix-agent'
+      apt: name=zabbix-agent update_cache=yes state=latest
+      tags: 
+      - zabbix-agent
+
+    - name: 'copy zabbix configuration file'
+      template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf seuser=system_u    
+      notify:
+      - Start Zabbix-agent
+      tags: 
+      - zabbix-agent  
+
+    - name: Start service, if not started
+      service:
+        name: zabbix-agent
+        state: started
+      tags: 
+      - zabbix-agent         

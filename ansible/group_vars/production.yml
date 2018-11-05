@@ -1,3 +1,4 @@
+ zabbix_server_ip: 192.168.40.3  
  stage: "prod"
  subdomain: "www"
  malls:

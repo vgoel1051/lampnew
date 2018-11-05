@@ -79,30 +79,3 @@
         recurse: yes
       with_items: "{{ malls }}"
       tags: apache2
-      
-    - name: Create target apache2 admin.htaccess directory
-      file:
-        path: /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin
-        state: directory
-        owner: www-data
-        group: www-data
-        mode: 0775
-        recurse: yes
-      with_items: "{{ malls }}"
-      tags: apache2
-      
-    - name: Create apache2 .htaccess
-      template:
-        src: templates/htdocs/.htaccess.j2
-        dest: /var/www/malls/{{ stage }}/{{ item.mall}}/htdocs/.htaccess  
-        mode: 0775        
-      with_items: "{{ malls }}"       
-      tags: apache2
-      
-    - name: Create apache2 admin .htaccess
-      template:
-        src: templates/htdocs/admin/.htaccess.j2
-        dest: /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin/.htaccess
-        mode: 0775
-      with_items: "{{ malls }}"
-      tags: apache2

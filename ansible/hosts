@@ -1,22 +1,36 @@
+LnVmWeb01 ansible_host=82.165.68.238
+LnVmWeb02 ansible_host=82.165.71.133
+LnVmWeb03 ansible_host=212.227.200.160
+LnVmWeb04 ansible_host=212.227.174.83
+
+LnBmSql01 ansible_host=217.160.11.145
+LnBmSql02 ansible_host=82.165.74.21
+LnBmSql03 ansible_host=82.165.68.59
+LnBmSql04 ansible_host=82.165.69.91
+
 [MediaXX]
 #88.99.241.51 #media09
 94.130.38.125 #media12
 
+[1und1-prod-monitor]
+212.227.201.46
+
 [1und1-prod-webservers]
-82.165.68.238 
-82.165.71.133
-212.227.200.160
-212.227.174.83
+LnVmWeb01
+LnVmWeb02
+LnVmWeb03
+LnVmWeb04
 
 [dnsnet-prod-webservers]
 10.100.5.116
 10.100.5.118
 
 [1und1-prod-dbservers]
-217.160.11.145
-82.165.74.21
-82.165.68.59
-82.165.69.91
+LnBmSql01
+LnBmSql02
+LnBmSql03
+LnBmSql04
+
 
 [dnsnet-prod-dbservers]
 #10.100.5.116
@@ -26,6 +40,9 @@
 
 [dnsnet-stage-dbservers]
 10.100.5.116
+
+[productionmonitor:children]
+1und1-prod-monitor
 
 [productionwebservers:children]
 1und1-prod-webservers
@@ -38,6 +55,7 @@ dnsnet-prod-dbservers
 [production:children]
 productionwebservers
 productiondbservers
+productionmonitor
 
 [stagewebservers:children]
 dnsnet-stage-webservers

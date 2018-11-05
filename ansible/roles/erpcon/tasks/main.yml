@@ -1,0 +1,43 @@
+# Setup/install tasks.
+---
+    - name: Create erpcon config directory
+      file:
+        path:  /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/config
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: 
+      - erpcon       
+
+    - name: Create erpcon web directory
+      file:
+        path:  /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: 
+      - erpcon 
+
+    - name: 'copy config file'
+      template: src=config/.env.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/config/.env
+      with_items: "{{ malls }}" 
+      tags: 
+      - erpcon
+ 
+    - name: 'copy web .htaccess file'
+      template: src=web/.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/.htaccess
+      with_items: "{{ malls }}" 
+      tags: 
+      - erpcon
+
+    - name: 'copy .htaccess file'
+      template: src=.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/.htaccess
+      with_items: "{{ malls }}" 
+      tags: 
+      - erpcon      

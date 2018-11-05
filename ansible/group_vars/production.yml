@@ -1,9 +1,9 @@
  stage: "prod"
  subdomain: "www"
  malls:
-      - {admin_domain: "shop-apc.elektronik-star.de", erpcon: "erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseuser: "prod_estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"}
-      - {admin_domain: "shop-apc.auna.de", mall: "auna", erpcon: "erp-connector.auna.de",  database: "aunaMall", databaseuser: "prod_aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk"} 
-      - {admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk", erpcon: "erp-connector-sk.elektronik-star.de", database: "skMall", databaseuser: "prod_skMallUser01", databasepass: "Uvhw^134dIw7b1!1"}     
-#      - {admin_domain: "shop-apc-cs.elektronik-star.de", erpcon: "erp-connector.cd.elektronik-star.de", mall: "capitalsports", database: "csMall", databaseuser: "prod_csMallUser01", databasepass: "asevaHak#876"}
-      - {admin_domain: "shop-apc.klarstein.com", mall: "klarstein", erpcon: "erp-connector.klarstein.de",  database: "klarsteinMall", databaseuser: "prod_klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb"}      
-      
+      - {admin_domain: "shop-apc.elektronik-star.de", erpcon: "erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseserver: "", databaseuser: "prod_estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "", apisecret: "", cdnurl: ""}
+      - {admin_domain: "shop-apc.auna.de", mall: "auna", erpcon: "erp-connector.auna.de",  database: "prod_aunaMall", databaseserver: "217.160.11.145", databaseuser: "prod_aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "fq45QS09_fqyx09239QQ", cdnurl: "https://cdn5.elektronik-star.de"} 
+      - {admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk", erpcon: "erp-connector-sk.elektronik-star.de", databaseserver: "", database: "skMall", databaseuser: "prod_skMallUser01", databasepass: "Uvhw^134dIw7b1!1", configurationkey: "", apisecret: "", cdnurl: ""}
+#      - {admin_domain: "shop-apc-cs.elektronik-star.de", erpcon: "erp-connector.cd.elektronik-star.de", mall: "capitalsports", databaseserver: "217.160.11.145", database: "csMall", databaseuser: "prod_csMallUser01", databasepass: "asevaHak#876", configurationkey: "", apisecret: "", cdnurl: ""}
+      - {admin_domain: "shop-apc.klarstein.com", mall: "klarstein", erpcon: "erp-connector.klarstein.de", databaseserver: "",  database: "klarsteinMall", databaseuser: "prod_klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb", configurationkey: "", apisecret: "", cdnurl: ""}
+               

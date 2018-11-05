@@ -1,0 +1,31 @@
+# Setup/install tasks.
+---
+    - name: Create oxidee admin directory
+      file:
+        path:  /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: 
+      - oxidee  
+
+    - name: 'copy config.inc.php file'
+      template: src=config.inc.php.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/config.inc.php
+      with_items: "{{ malls }}" 
+      tags: 
+      - oxidee
+
+    - name: 'copy  .htaccess file'
+      template: src=.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/.htaccess
+      with_items: "{{ malls }}" 
+      tags: 
+      - oxidee
+ 
+    - name: 'copy admin .htaccess file'
+      template: src=admin/.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin/.htaccess
+      with_items: "{{ malls }}" 
+      tags: 
+      - oxidee

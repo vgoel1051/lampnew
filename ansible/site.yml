@@ -22,7 +22,9 @@
     - apache-2
     - php-5-6
     - zendguard    
-    
+    - erpcon
+    - oxidee
+        
 - hosts: stagedbservers   
   roles:
     - mysql
@@ -36,4 +38,5 @@
     - apache-2
     - php-5-6
     - zendguard
-    
+    - erpcon
+    - oxidee

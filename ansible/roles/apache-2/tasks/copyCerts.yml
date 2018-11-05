@@ -9,15 +9,22 @@
         mode: 0775
         recurse: yes
       with_items: "{{ malls }}"
-      tags: apache2
+      tags: 
+      - apache2    
+      - apache2_certs
         
-    - name: copy ssl directory
-      copy: 
-        src: /var/www/ShopCertificates/ssl 
+
+    
+    # Synchronize two directories on one remote host.
+    - synchronize:
+        src: /var/www/ShopCertificates/ssl
         dest: /etc/apache2/
-        owner: www-data
-        group: www-data
-        mode: 0775
-        remote_src: no
-        directory_mode: yes  
-      tags: apache2
+        owner: no
+        group: no       
+        recursive: yes
+        delete: yes
+        rsync_opts: ["--compress"]
+        private_key : ~/.ssh/id_rsa
+      tags: 
+      - apache2    
+      - apache2_certs      

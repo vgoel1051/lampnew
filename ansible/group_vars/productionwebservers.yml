@@ -1,0 +1,2 @@
+ session_save_handler: "redis"
+ session_save_path: "tcp://192.168.40.100:6379?auth=DaP19mevEfpOai87egf8"

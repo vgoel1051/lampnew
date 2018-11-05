@@ -3,7 +3,7 @@
     ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
     ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
     ServerAlias {{ item.erpcon }}
-    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/
+    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web
 
     <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/>
 	Options Indexes FollowSymLinks MultiViews
@@ -23,7 +23,7 @@
     ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
     ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
     ServerAlias {{ item.erpcon }}
-	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web/
+	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web
 
 	SSLEngine on
 

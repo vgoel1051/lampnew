@@ -11,6 +11,7 @@
     shell=/usr/sbin/nologin
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -24,6 +25,7 @@
     mode=0755
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -37,6 +39,7 @@
     mode=0700
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -50,22 +53,24 @@
     mode=0600
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
 
-- name: Adding user's chroot folder
-  file: >
-    dest={{ item.home|default(sftp_users_home ~ '/' ~ item.username) }}/chroot
-    state=directory
-    owner=root
-    group={{ item.group|default(sftp_users_group) }}
-    mode=0755
-  with_items: sftp_users
-  tags:
-    - networking
-    - sftp
-    - users
+#- name: Adding user's chroot folder
+#  file: >
+#    dest={{ item.home|default(sftp_users_home ~ '/' ~ item.username) }}/chroot
+#    state=directory
+#    owner=root
+#    group={{ item.group|default(sftp_users_group) }}
+#    mode=0755
+#  with_items: sftp_users
+#  tags:
+#    - sftp_users
+#    - networking
+#    - sftp
+#    - users
 
 - name: Adding user's folders
   file: >
@@ -78,6 +83,7 @@
     - sftp_users
     - sftp_users_folders
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -93,6 +99,7 @@
   notify: restart ssh
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -101,6 +108,7 @@
   command: >
     sed -in '/{{ sftp_placeholder_start }}/,/{{ sftp_placeholder_end }}/d' /etc/fstab
   tags:
+    - sftp_users
     - networking
     - sftp
     - config
@@ -111,6 +119,7 @@
     dest=/etc/fstab
     line="{{ sftp_placeholder_start ~ '\n' ~ sftp_placeholder_end }}"
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -124,6 +133,7 @@
     mode=0755
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -133,6 +143,7 @@
     find {{ item.home|default(sftp_users_home ~ '/' ~ item.username) }}/chroot/mnt -maxdepth 1 -mindepth 1 -type d -exec umount {} \;
   with_items: sftp_users
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -147,7 +158,9 @@
   with_subelements:
     - sftp_users
     - mount_points
+  when: mount_points is defined and mount_points != ''
   tags:
+    - sftp_users
     - networking
     - sftp
     - users
@@ -163,7 +176,9 @@
   with_subelements:
     - sftp_users
     - mount_points
+  when: mount_points is defined and mount_points != ''
   tags:
+    - sftp_users
     - networking
     - sftp
     - users

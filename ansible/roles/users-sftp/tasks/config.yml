@@ -6,6 +6,7 @@
     state=present
   when: sftp_users_group is defined
   tags:
+    - sftp_users
     - networking
     - sftp
     - config
@@ -18,6 +19,7 @@
     regexp="^/usr/sbin/nologin"
     insertafter=EOF
   tags:
+    - sftp_users
     - networking
     - sftp
     - config
@@ -31,6 +33,7 @@
     regexp="^Subsystem sftp"
   notify: restart ssh
   tags:
+    - sftp_users
     - networking
     - sftp
     - config
@@ -40,6 +43,7 @@
     sed -in '/{{ sftp_placeholder_start }}/,/{{ sftp_placeholder_end }}/d' /etc/ssh/sshd_config
   notify: restart ssh
   tags:
+    - sftp_users
     - networking
     - sftp
     - config
@@ -51,6 +55,7 @@
     validate="/usr/sbin/sshd -T -f %s"
     line="{{ '\n' ~ sftp_placeholder_start ~ '\n' ~ sftp_placeholder_end }}"
   tags:
+    - sftp_users
     - networking
     - sftp
     - config

@@ -1,20 +1,32 @@
 ---
 - copy: src={{ playbook_dir}}/roles/zendguard/module/ZendGuardLoader.so dest=/usr/lib/php/20131226/ remote_src=false
   become: yes
+  tags: 
+  - zendguard
+
 
 - copy: src={{ playbook_dir}}/roles/zendguard/module/zend_opcache.so dest=/usr/lib/php/20131226/ remote_src=false
   become: yes  
+  tags: 
+  - zendguard
 
 - name: Place ZendGuard configuration
   become: yes
   template: src=zend.ini dest=/etc/php/5.6/mods-available/zend.ini
+  tags: 
+  - zendguard
 
 - name: Disable standard PHP5 opcache
   become: yes
   command: phpdismod opcache
   notify: restart apache
+  tags: 
+  - zendguard
 
 - name: Enable ZendGuard opcache
   become: yes
   command: phpenmod zend
   notify: restart apache
+  tags: 
+  - zendguard
+    

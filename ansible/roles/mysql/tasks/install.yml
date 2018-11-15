@@ -1,26 +1,28 @@
 ---
 # tasks file for mysql
 
- - name: Install required software
-   apt: name={{ item }} state=present
-   sudo: yes
-   with_items:
-     - build-essential
-     - python-dev
-     - python-mysqldb
-   tags: mysql
+  - name: Install required software
+    apt: name={{ item }} state=present
+    sudo: yes
+    with_items:
+      - build-essential
+      - python-dev
+      - python-mysqldb
+    tags: mysql
    
- - name: Install the MySQL packages
-   apt: name={{ item }} state=installed update_cache=yes
-   with_items:
-     - mysql-server
-     - mysql-client
-     - python-mysqldb
-     - libmysqlclient-dev
-   tags: mysql
+  - name: Install the MySQL packages
+    apt: name={{ item }} state=installed update_cache=yes
+    with_items:
+      - mysql-server
+      - mysql-client
+      - python-mysqldb
+      - libmysqlclient-dev
+    tags: mysql
 
- - name: bind mysql remote address
-   ini_file: dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+  - name: bind mysql remote address
+    ini_file: dest=/etc/mysql/conf.d/mysqld.cnf
              section=mysqld
              option=bind-address
              value='0.0.0.0'
+    sudo: yes
+    tags: mysql

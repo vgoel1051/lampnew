@@ -15,13 +15,13 @@
     /** @name database information */
     $this->dbType = 'mysql';
     $this->dbHost = '{{ item.databaseserver }}'; // database host name
-    $this->dbName = '{{ item.database }}'; // database name
-    $this->dbUser = '{{ item.databaseuser }}'; // database user name
+    $this->dbName = '{{ stage }}_{{ item.database }}'; // database name
+    $this->dbUser = '{{ stage }}_{{ item.databaseuser }}'; // database user name
     $this->dbPwd = '{{ item.databasepass }}'; // database user password
-    $this->sShopURL = '{{ item.admin_domain }}'; // eShop base url, required
+    $this->sShopURL = 'http://{{ item.admin_domain }}'; // eShop base url, required
     $this->sSSLShopURL  = null;            // eShop SSL url, optional
     $this->sAdminSSLURL = null;            // eShop Admin SSL url, optional
-    $this->sShopDir = '/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/';
+    $this->sShopDir = '/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs';
     $this->sCompileDir = '/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/tmp';
 
     //CDN usage

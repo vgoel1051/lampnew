@@ -1,46 +1,68 @@
+# 1und1 WEB
+LnWebAdm01  ansible_host=93.90.207.90
 LnVmWeb01 ansible_host=82.165.68.238
-LnVmWeb02 ansible_host=82.165.71.133
-LnVmWeb03 ansible_host=212.227.200.160
-LnVmWeb04 ansible_host=212.227.174.83
+LnVmWeb02 ansible_host=82.165.251.190 
+LnWebApp01 ansible_host=82.165.23.88 
+LnWebApp04 ansible_host=82.165.250.111
+LnWebApp05 ansible_host=212.227.10.250
 
+# 1und1 DB
 LnBmSql01 ansible_host=217.160.11.145
-LnBmSql02 ansible_host=82.165.74.21
-LnBmSql03 ansible_host=82.165.68.59
-LnBmSql04 ansible_host=82.165.69.91
+LnWebSql02 ansible_host=82.165.96.71
+LnWebSql03 ansible_host=82.165.250.83
+LnWebSql04 ansible_host=82.165.69.130
+
+# RZ
+LnVmWeb11 ansible_host=10.100.5.108
+LnVmWeb12 ansible_host=10.100.5.117
+LnVmWeb13 ansible_host=10.100.5.118
+LnVmWeb14 ansible_host=10.100.5.116
 
 [MediaXX]
 #88.99.241.51 #media09
 94.130.38.125 #media12
 
+82.165.96.71 
+10.100.5.21
+10.100.2.230
+
+
+######################
+# Production         #
+######################
+
 [1und1-prod-monitor]
 212.227.201.46
+
+# 1und1              
 
 [1und1-prod-webservers]
 LnVmWeb01
 LnVmWeb02
-LnVmWeb03
-LnVmWeb04
+LnWebApp01
+LnWebApp04
+LnWebApp05
+LnWebAdm01
 
-[dnsnet-prod-webservers]
-10.100.5.116
-10.100.5.118
 
 [1und1-prod-dbservers]
 LnBmSql01
-LnBmSql02
-LnBmSql03
-LnBmSql04
+LnWebSql02
+LnWebSql03
+LnWebSql04
 
+
+# DnsNet              
+
+[dnsnet-prod-webservers]
+LnVmWeb11
+LnWebAdm01
 
 [dnsnet-prod-dbservers]
 #10.100.5.116
 
-[dnsnet-stage-webservers]
-10.100.5.117
 
-[dnsnet-stage-dbservers]
-10.100.5.116
-
+# Environment  
 [productionmonitor:children]
 1und1-prod-monitor
 
@@ -57,6 +79,17 @@ productionwebservers
 productiondbservers
 productionmonitor
 
+
+######################
+# Stage              #
+######################
+
+[dnsnet-stage-webservers]
+10.100.5.117
+
+[dnsnet-stage-dbservers]
+10.100.5.116
+
 [stagewebservers:children]
 dnsnet-stage-webservers
 
@@ -66,3 +99,49 @@ dnsnet-stage-dbservers
 [stage:children]
 stagewebservers
 stagedbservers
+
+
+######################
+# Daily              #
+######################
+
+[dnsnet-daily-dbservers]
+LnVmWeb12
+LnVmWeb13
+LnVmWeb14
+
+[dnsnet-daily-webservers]
+LnVmWeb12
+LnVmWeb13
+LnVmWeb14
+
+[dailywebservers:children]
+dnsnet-daily-webservers
+
+[dailydbservers:children]
+dnsnet-daily-dbservers
+
+[daily:children]
+dailydbservers
+dailywebservers
+
+
+######################
+# dev                #
+######################
+
+[dnsnet-dev-dbservers]
+LnVmWeb12
+
+[dnsnet-dev-webservers]
+LnVmWeb12
+
+[devwebservers:children]
+dnsnet-dev-webservers
+
+[devdbservers:children]
+dnsnet-dev-dbservers
+
+[dev:children]
+devdbservers
+devwebservers

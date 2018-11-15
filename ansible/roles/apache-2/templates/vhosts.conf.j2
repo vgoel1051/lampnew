@@ -1,5 +1,4 @@
 <VirtualHost *:80>
-    Protocols h2c http/1.1
     ServerAdmin webmaster@{{ item.domain }}
     ServerName {{ item.domain }}
     ServerAlias {{ subdomain }}.{{ item.domain }}
@@ -19,7 +18,6 @@
 	SSLStaplingCache shmcb:/tmp/stapling_cache(128000)
 
     <VirtualHost *:443>
-	Protocols h2 http/1.1
 	ServerAdmin webmaster@{{ item.domain }}
 	ServerName {{ item.domain }}
 	ServerAlias {{ subdomain }}.{{ item.domain }}

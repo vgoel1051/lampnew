@@ -19,7 +19,7 @@
 
  - name: Update MySQL password for all {{ mysql_user }} accounts
    mysql_user: 
-     name: "{{ item.databaseuser }}"
+     name: "{{ stage }}_{{ item.databaseuser }}"
      host: localhost
      password: "{{ item.databasepass }}"
      priv: '*.*:ALL,GRANT'
@@ -29,7 +29,7 @@
 
  - name: Update MySQL password for all {{ mysql_user }} accounts
    mysql_user: 
-     name: "{{ item.databaseuser }}"
+     name: "{{ stage }}_{{ item.databaseuser }}"
      host: "%"
      password: "{{ item.databasepass }}"
      priv: '*.*:ALL,GRANT'

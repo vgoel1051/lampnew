@@ -27,7 +27,21 @@ sftp_users:
        - staff
        - www-data
      mount_points: []
-#       - {name: "htdocs_malls", path: "/var/www/malls/{{ stage }}"}
+#       - {name: "htdocs_malls", path: "/var/www/malls/{{ stage }}/estar/htdocs/out/media"}
+
+      
+   - username: estar-sftp
+     name: estar-sftp    
+     password: '$1$somesalt$TpjHsNy5J9hOnzASFeyJ71'
+     authorized_keys: []
+     home: /home/estar-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points: 
+       - {name: "media_estar", path: "/var/www/malls/{{ stage }}/estar/htdocs/out/media"}
+      
 
    - username: chaltecweb
      name: chaltecweb    
@@ -51,7 +65,7 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_skmall", path: "/var/www/malls/{{ stage }}/sk/htdocs"}
+       - {name: "media_sk", path: "/var/www/malls/{{ stage }}/sk/htdocs/out/media"}
      
    - username: klarstein-sftp
      name: klarstein-sftp    
@@ -63,20 +77,8 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_klarsteinmall", path: "/var/www/malls/{{ stage }}/klarstein/htdocs"}
-       
-   - username: estar-sftp
-     name: estar-sftp    
-     password: '$1$somesalt$TpjHsNy5J9hOnzASFeyJ71'
-     authorized_keys: []
-     home: /home/estar-sftp
-     group: ftp
-     groups:
-       - staff
-       - www-data
-     mount_points:
-       - {name: "htdocs_estarmall", path: "/var/www/malls/{{ stage }}/estar/htdocs"}
-       
+       - {name: "media_klarstein", path: "/var/www/malls/{{ stage }}/klarstein/htdocs/out/media"}
+  
    - username: auna-sftp
      name: auna-sftp
      password: '$1$somesalt$RaaelHIyZB0k/zY.ZUR6k.'
@@ -87,7 +89,7 @@ sftp_users:
        - staff
        - www-data
      mount_points:
-       - {name: "htdocs_aunamall", path: "/var/www/malls/{{ stage }}/auna/htdocs"}
+       - {name: "media_auna", path: "/var/www/malls/{{ stage }}/auna/htdocs/out/media"}
         
 sftp_users_group: ftp
 # default user groups

@@ -2,6 +2,9 @@
 LnWebAdm01  ansible_host=93.90.207.90
 LnVmWeb01 ansible_host=82.165.68.238
 LnVmWeb02 ansible_host=82.165.251.190 
+LnVmWeb03 ansible_host=93.90.205.107
+LnVmWeb04 ansible_host=82.165.101.229
+
 LnWebApp01 ansible_host=82.165.23.88 
 LnWebApp04 ansible_host=82.165.250.111
 LnWebApp05 ansible_host=212.227.10.250
@@ -39,6 +42,8 @@ LnVmWeb14 ansible_host=10.100.5.116
 [1und1-prod-webservers]
 LnVmWeb01
 LnVmWeb02
+LnVmWeb03
+LnVmWeb04
 LnWebApp01
 LnWebApp04
 LnWebApp05

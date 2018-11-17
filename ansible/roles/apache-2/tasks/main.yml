@@ -65,3 +65,4 @@
     - include: copyCerts.yml
     - include: shopadmin.yml
     - include: erpcon.yml      
+    - include: preforkConf.yml

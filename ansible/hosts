@@ -1,19 +1,24 @@
-# 1und1 WEB
-LnWebAdm01  ansible_host=93.90.207.90
-LnVmWeb01 ansible_host=82.165.68.238
-LnVmWeb02 ansible_host=82.165.251.190 
-LnVmWeb03 ansible_host=93.90.205.107
-LnVmWeb04 ansible_host=82.165.101.229
 
-LnWebApp01 ansible_host=82.165.23.88 
-LnWebApp04 ansible_host=82.165.250.111
-LnWebApp05 ansible_host=212.227.10.250
+#Redis
+LNWebRedis01  ansible_host=82.165.163.97 	#192.168.40.100 
+
+# 1und1 WEB
+LnWebAdm01  ansible_host=93.90.207.90 		#192.168.40.7
+LnVmWeb01 ansible_host=82.165.68.238
+LnVmWeb02 ansible_host=82.165.251.190 		#192.168.40.122
+LnVmWeb03 ansible_host=82.165.250.53		#192.168.40.123
+LnVmWeb04 ansible_host=212.227.175.58		#192.168.40.124
+LnVmWeb05 ansible_host=212.227.10.229		#192.168.40.125
+LnVmWeb06 ansible_host=82.165.68.88 		#192.168.40.126
+LnVmWeb07 ansible_host=93.90.205.107		#192.168.40.127
+LnVmWeb08 ansible_host=82.165.101.229		#192.168.40.128
+
 
 # 1und1 DB
 LnBmSql01 ansible_host=217.160.11.145
-LnWebSql02 ansible_host=82.165.96.71
-LnWebSql03 ansible_host=82.165.250.83
-LnWebSql04 ansible_host=82.165.69.130
+LnWebSql02 ansible_host=82.165.96.71		#192.168.40.12
+LnWebSql03 ansible_host=82.165.250.83		#192.168.40.13
+LnWebSql04 ansible_host=82.165.69.130 		#192.168.40.14
 
 # RZ
 LnVmWeb11 ansible_host=10.100.5.108
@@ -44,9 +49,10 @@ LnVmWeb01
 LnVmWeb02
 LnVmWeb03
 LnVmWeb04
-LnWebApp01
-LnWebApp04
-LnWebApp05
+LnVmWeb05
+LnVmWeb06
+LnVmWeb07
+LnVmWeb08
 LnWebAdm01
 
 

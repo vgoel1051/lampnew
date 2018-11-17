@@ -23,12 +23,12 @@ AddType text/javascript .template
     # Don't put www. here. If it is already there it will be included, if not
     # the subsequent rule will catch it.
     RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-    # Now, rewrite any request to the wrong domain to use {{ stage }}.
+    # Now, rewrite any request to the wrong domain to use {{ subdomain }}.
     # [NC] is a case-insensitive match
-    RewriteCond %{HTTP_HOST} !^{{ stage }}\. [NC]
+    RewriteCond %{HTTP_HOST} !^{{ subdomain }}\. [NC]
     RewriteCond %{HTTP_HOST} !^mitarbeiter\. [NC]
     RewriteCond %{HTTP_HOST} !^{{ item.admin_subdomain  }}\. [NC]
-    RewriteRule .* https://{{ stage }}.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteRule .* https://{{ subdomain }}.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 
     RewriteCond %{REQUEST_URI}     config\.inc\.php [NC]

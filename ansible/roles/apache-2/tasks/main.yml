@@ -39,8 +39,9 @@
         src: templates/vhosts.conf.j2
         dest: /etc/apache2/sites-available/{{ subdomain }}.{{ item['domain'] }}.conf
       with_items: "{{ vhost_sites }}"      
-      tags: apache2
-      
+      tags: 
+      - apache2
+      - apache2_vhosts      
     - name: a2ensite {{ subdomain }}.{{ item['domain'] }}
       command: a2ensite {{ subdomain }}.{{ item['domain'] }}
       args:
@@ -48,7 +49,9 @@
       with_items: "{{ vhost_sites }}"
       notify:
       - restart apache2  
-      tags: apache2
+      tags: 
+      - apache2
+      - apache2_vhosts        
       
 
     - name: Create sqlDumps directory
@@ -66,3 +69,4 @@
     - include: shopadmin.yml
     - include: erpcon.yml      
     - include: preforkConf.yml
+    - include: shopMitarbeiter.yml

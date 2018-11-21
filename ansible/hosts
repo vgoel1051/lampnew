@@ -13,6 +13,8 @@ LnVmWeb06 ansible_host=82.165.68.88 		#192.168.40.126
 LnVmWeb07 ansible_host=93.90.205.107		#192.168.40.127
 LnVmWeb08 ansible_host=82.165.101.229		#192.168.40.128
 
+LnWebDaily01 ansible_host=82.165.97.199		#192.168.40.199
+
 
 # 1und1 DB
 LnBmSql01 ansible_host=217.160.11.145
@@ -116,6 +118,12 @@ stagedbservers
 # Daily              #
 ######################
 
+[1und1-daily-webservers]
+LnWebDaily01
+
+[1und1-daily-dbservers]
+LnWebDaily01
+
 [dnsnet-daily-dbservers]
 LnVmWeb12
 LnVmWeb13
@@ -127,9 +135,11 @@ LnVmWeb13
 LnVmWeb14
 
 [dailywebservers:children]
+1und1-daily-webservers
 dnsnet-daily-webservers
 
 [dailydbservers:children]
+1und1-daily-dbservers
 dnsnet-daily-dbservers
 
 [daily:children]

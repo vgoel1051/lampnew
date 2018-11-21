@@ -1,10 +1,16 @@
  zabbix_server_ip: 212.227.201.46
  stage: "daily"
  subdomain: "daily"
+
+ innodb_buffer_pool_size: "4G"
+ innodb_buffer_pool_instances: "2"
+
  malls:
       - {admin_subdomain: "daily-apc", admin_domain: "daily-apc.elektronik-star.de", erpcon: "daily-erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseserver: "localhost", databaseuser: "estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn4.elektronik-star.de"}
       - {admin_subdomain: "daily-apc", admin_domain: "daily-apc.auna.de", mall: "auna", erpcon: "daily-erp-connector.auna.de",  database: "aunaMall", databaseserver: "localhost", databaseuser: "aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn5.elektronik-star.de"} 
       - {admin_subdomain: "daily-apc", admin_domain: "daily-apc-sk.elektronik-star.de", mall: "sk", erpcon: "daily-erp-connector-sk.elektronik-star.de", database: "skMall", databaseserver: "localhost", databaseuser: "skMallUser01", databasepass: "Uvhw^134dIw7b1!1", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn7.elektronik-star.de"}
 #      - {admin_subdomain: "daily-apc", admin_domain: "daily-apc-cs.elektronik-star.de", erpcon: "erp-connector.cd.elektronik-star.de", mall: "capitalsports", database: "csMall", databaseserver: "localhost", databaseuser: "csMallUser01", databasepass: "asevaHak#876", configurationkey: "", apisecret: "", cdnurl: ""}
       - {admin_subdomain: "daily-apc", admin_domain: "daily-apc.klarstein.com", mall: "klarstein", erpcon: "daily-erp-connector.klarstein.com", databaseserver: "localhost",  database: "klarsteinMall", databaseuser: "klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb", configurationkey: "", apisecret: "", cdnurl: ""}
-               
+
+ mitarbeiterShops:
+      - {subdomain: "dailymitarbeiter", domain: "elektronik-star.de", mall: "estar", }               

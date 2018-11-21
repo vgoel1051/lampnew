@@ -37,6 +37,20 @@
       tags: 
       - zabbix-agent
 
+    - name: 'copy zabbix userparameter_mysql configuration file'
+      template: src=userparameter_mysql.conf.j2 dest=/etc/zabbix/zabbix_agentd.d/userparameter_mysql.conf seuser=system_u    
+      notify:
+      - Start Zabbix-agent
+      tags: 
+      - zabbix-agent  
+
+    - name: 'copy zabbix mysql configuration file'
+      template: src=.my.cnf.j2 dest=/etc/zabbix/.my.cnf seuser=system_u    
+      notify:
+      - Start Zabbix-agent
+      tags: 
+      - zabbix-agent        
+
     - name: 'copy zabbix configuration file'
       template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf seuser=system_u    
       notify:

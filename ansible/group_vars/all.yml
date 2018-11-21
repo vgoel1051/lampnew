@@ -1,5 +1,9 @@
  mysql_user: deployjenkins 
+ mysql_deployjenkins_pass: WCoPUzkAS!nW4qoMCcSTg
+
  mysql_rootuser: root
+ mysql_root_pass: nbsPtrtAgGkhTfdjp52D
+ 
  vhost_sites:   
  
      - {domain: "auna.de", mall: "auna"}
@@ -53,7 +57,7 @@
      - {domain: "klarstein.hr", mall: "klarstein"}
      - {domain: "klarstein.ro", mall: "klarstein"}
      - {domain: "klarstein.bg", mall: "klarstein"}
-#     - {domain: "steakreaktor.com", mall: "klarstein"}
+     - {domain: "steakreaktor.com", mall: "klarstein"}
      - {domain: "klarstein.com", mall: "klarstein"}  
      - {domain: "auna-multimedia.com", mall: "klarstein"}
      

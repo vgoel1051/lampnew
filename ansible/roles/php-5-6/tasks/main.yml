@@ -51,6 +51,16 @@
       - php 
       - php5.6     
 
+    - name: disable apache2 php5.6 module
+      apache2_module:
+        state: absent
+        name: mpm_event
+      notify:
+        - restart apache2
+      with_items:    
+        - php5.6
+      tags: apache2
+
     - name: activate apache2 php5.6 module
       apache2_module:
         state: present

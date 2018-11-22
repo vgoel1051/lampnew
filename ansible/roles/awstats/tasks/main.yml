@@ -1,0 +1,53 @@
+---
+
+    - name: install awstats
+      apt: name=awstats update_cache=yes state=latest
+      tags: 
+      - awstats
+
+
+    - name: Create awstats.conf
+      template:
+        src: templates/awstats.conf.j2
+        dest: /etc/awstats/awstats.conf
+        owner: root
+        group: root
+        mode: 0644
+      with_items: "{{ malls }}"           
+      tags: 
+      - awstats
+
+    - name: Create apache2 awstats.conf
+      template:
+        src: templates/conf-available/awstats.conf.j2
+        dest: /etc/apache2/conf-available/awstats.conf
+        owner: www-data
+        group: www-data
+        mode: 0774
+      tags: 
+      - awstats
+
+    - name: activate apache2 module
+      apache2_module:
+        state: present
+        name: cgi
+      notify:
+        - restart apache2   
+      tags:
+      - awstats
+
+    - name: a2enconf awstats serve-cgi-bin
+      command: sudo a2enconf awstats serve-cgi-bin
+      tags:
+      - awstats
+
+    - name:  adjust AWStats permissions 1
+      command: sudo sed -i -e "s/www-data/root/g" /etc/cron.d/awstats
+      tags:
+      - awstats
+
+
+    - name:  adjust AWStats permissions 2
+      command: sudo /usr/share/awstats/tools/update.sh
+      tags:
+      - awstats      

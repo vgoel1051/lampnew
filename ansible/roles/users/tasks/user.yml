@@ -9,6 +9,7 @@
      - htop
      - iftop
      - rsync
+   tags: user     
    
  - debug: msg="{{ lookup('env','HOME') }} is an environment variable"
  - name: Create a login user
@@ -16,13 +17,14 @@
      name: "{{ item.name }}"
      password: "{{ item.pass }}"
      update_password: on_create     
-     groups: www-data,sudo   
+     groups: "{{ item.groups }}"
      state: present
      shell: /bin/bash     
      createhome: yes        
      home: /home/{{ item.name }}
      append: yes
    with_items: "{{ consoleusers }}"
+   tags: user    
 
  - name: set Usersdirectory permission
    file:
@@ -31,6 +33,7 @@
      group: "{{ item.name }}"
      mode: 0775
    with_items: "{{ consoleusers }}"
+   tags: user    
    
  - name: Add .ssh directories
    file:
@@ -40,6 +43,7 @@
      owner={{ item.name }}
      group={{ item.name }}  
    with_items: "{{ consoleusers }}"
+   tags: user    
    
  - name: Copy id_rsa.pub file
    template: 
@@ -49,6 +53,7 @@
      group: "{{ item.name }}"
      mode: '0644'
    with_items: "{{ consoleusers }}"
+   tags: user    
    
  - name: Copy id_rsa file
    template: 
@@ -57,7 +62,8 @@
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0600'
-   with_items: "{{ consoleusers }}"   
+   with_items: "{{ consoleusers }}"
+   tags: user    
 
  - name: Adding authorized keys
    template: 
@@ -66,12 +72,20 @@
      owner: "{{ item.name }}"
      group: "{{ item.name }}"
      mode: '0644'
-   with_items: "{{ consoleusers }}"   
-     
- - name: Allow specified groups to sudo
-   template: 
-     src: sudoers.j2
+   with_items: "{{ consoleusers }}"
+   tags: user    
+
+ - name: add user fpr passwordless sudo
+   lineinfile:
      dest: /etc/sudoers.d/sudoers
+     state: present
+     regexp: '^%{{ item }}'
+     line: '%{{ item }} ALL=(ALL) NOPASSWD: ALL'
      validate: 'visudo -cf %s'
-     mode: 0440   
-  
+   with_items: "{{ sudoers }}"         
+   tags: 
+     - user   
+     - user_sudoers
+   
+
+ 

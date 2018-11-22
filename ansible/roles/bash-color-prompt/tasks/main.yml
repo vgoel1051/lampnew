@@ -1,4 +1,8 @@
 ---
- - name: Turn On Color Prompt
-   lineinfile: dest=~{{ item.name }}/.bashrc line="force_color_prompt=yes" regexp='#?force_color_prompt=yes' state=present
-   with_items: "{{ consoleusers }}"
+    - name: install bash-completion
+      apt: name=bash-completion update_cache=yes state=latest
+      tags: bash-completion
+
+    - name: Turn On Color Prompt
+      lineinfile: dest=~{{ item.name }}/.bashrc line="force_color_prompt=yes" regexp='#?force_color_prompt=yes' state=present
+      with_items: "{{ consoleusers }}"

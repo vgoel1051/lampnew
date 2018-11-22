@@ -28,6 +28,7 @@
     - oxidee
     - zabbix-agent
     - hostname
+    - awstats
             
 - hosts: stagedbservers   
   roles:
@@ -65,4 +66,5 @@
     - oxidee
     - zabbix-agent
     - hostname
+    - awstats
                 

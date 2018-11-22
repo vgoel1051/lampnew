@@ -47,7 +47,6 @@ LnVmWeb14 ansible_host=10.100.5.116
 # 1und1              
 
 [1und1-prod-webservers]
-LnVmWeb01
 LnVmWeb02
 LnVmWeb03
 LnVmWeb04

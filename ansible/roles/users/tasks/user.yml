@@ -10,26 +10,6 @@
      - iftop
      - rsync
    tags: user     
-
- - name: add ssh ClientAliveInterval
-   lineinfile:
-     dest:  /etc/ssh/sshd_config
-     state: present
-     regexp: '^ClientAliveInterval'
-     line: 'ClientAliveInterval 600'          
-   tags: 
-     - user   
-     - user_clientalive
-
- - name: add ssh ClientAliveCountMax
-   lineinfile:
-     dest:  /etc/ssh/sshd_config
-     state: present
-     regexp: '^ClientAliveCountMax'
-     line: 'ClientAliveCountMax 0'          
-   tags: 
-     - user   
-     - user_clientalive     
    
  - debug: msg="{{ lookup('env','HOME') }} is an environment variable"
  - name: Create a login user

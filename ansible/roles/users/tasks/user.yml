@@ -75,6 +75,12 @@
    with_items: "{{ consoleusers }}"
    tags: user    
 
+
+ - name: Ansible create sudoers file if it doesn't exist 
+   file:
+     path: "/etc/sudoers.d/sudoers"
+     state: touch
+
  - name: add user fpr passwordless sudo
    lineinfile:
      dest: /etc/sudoers.d/sudoers

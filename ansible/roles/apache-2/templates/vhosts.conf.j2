@@ -5,12 +5,19 @@
     DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs
 
     <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
-	Options Indexes FollowSymLinks MultiViews
-	# changed from None to FileInfo
-	AllowOverride All
-	Order allow,deny
-	allow from all
+		Options Indexes FollowSymLinks MultiViews
+		# changed from None to FileInfo
+		AllowOverride All
+		Order allow,deny
+		allow from all
     </Directory>
+
+	<Directory /usr/lib/cgi-bin/>
+	  AuthName "Enter Your User Name and Password"
+	  AuthType Basic
+	  AuthUserFile /etc/apache2/auth_users
+	  Require valid-user
+	</Directory>
 
 </VirtualHost>
 
@@ -36,6 +43,13 @@
 	    AllowOverride All
 	    Order allow,deny
 	    allow from all
+	</Directory>
+
+	<Directory /usr/lib/cgi-bin/>
+	  AuthName "Enter Your User Name and Password"
+	  AuthType Basic
+	  AuthUserFile /etc/apache2/auth_users
+	  Require valid-user
 	</Directory>
 
 	ErrorLog ${APACHE_LOG_DIR}/{{ item.domain }}_error.log

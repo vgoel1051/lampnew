@@ -9,11 +9,11 @@
     - name: Create awstats.conf
       template:
         src: templates/awstats.conf.j2
-        dest: /etc/awstats/awstats.conf
+        dest: /etc/awstats/awstats.{{ subdomain }}.{{ item.domain }}.conf
         owner: root
         group: root
         mode: 0644
-      with_items: "{{ malls }}"           
+      with_items: "{{ vhost_sites }}"           
       tags: 
       - awstats
 

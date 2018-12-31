@@ -2,8 +2,9 @@
  stage: "prod"
  subdomain: "www"
 
- innodb_buffer_pool_size: "16G"
- innodb_buffer_pool_instances: "10"
+ innodb_buffer_pool_size: "25G"
+ innodb_buffer_pool_instances: "16"
+ innodb_thread_concurrency: "16"
 
  malls:
       - {admin_subdomain: "shop-apc", admin_domain: "shop-apc.elektronik-star.de", erpcon: "erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseserver: "192.168.40.13", databaseuser: "estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn4.elektronik-star.de"}

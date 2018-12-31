@@ -47,7 +47,9 @@
 # If there are several log files from load balancing servers :
 # Example: "/pathtotools/logresolvemerge.pl *.log |"
 #
-LogFile="/var/log/apache2/access.log"
+LogFile="/var/log/apache2/{{ item.domain }}_access.log "
+
+#LogFile="/usr/share/awstats/tools/logresolvemerge.pl /var/log/apache2/{{ item.domain }}_access.log /var/log/apache2/{{ item.domain }}_access.log.1 /var/log/apache2/{{ item.domain }}_access.log.*.gz |"
 
 
 # Enter the log file type you want to analyze.
@@ -150,7 +152,7 @@ LogSeparator=" "
 # Example: "ftp.domain.com"
 # Example: "domain.com"
 #
-SiteDomain="{{ item.admin_domain }}"
+SiteDomain="{{ subdomain }}.{{ item.domain }}"
 
 
 # Enter here all other possible domain names, addresses or virtual host
@@ -236,7 +238,7 @@ DirIcons="/awstats-icon"
 # Possible values: 0 or 1
 # Default: 0
 #
-AllowToUpdateStatsFromBrowser=0
+AllowToUpdateStatsFromBrowser=1
 
 
 # AWStats saves and sorts its database on a month basis (except if using
@@ -256,7 +258,7 @@ AllowToUpdateStatsFromBrowser=0
 #  3 - Possible on CLI and CGI
 # Default: 2
 #
-AllowFullYearView=2
+AllowFullYearView=3
 
 
 

@@ -21,12 +21,18 @@ LnBmSql01 ansible_host=217.160.11.145
 LnWebSql02 ansible_host=82.165.96.71		#192.168.40.12
 LnWebSql03 ansible_host=82.165.250.83		#192.168.40.13
 LnWebSql04 ansible_host=82.165.69.130 		#192.168.40.14
+LnBmSql02 ansible_host=93.90.192.106
+LnBmSql03 ansible_host=93.90.192.225
 
 # RZ
 LnVmWeb11 ansible_host=10.100.5.108
-LnVmWeb12 ansible_host=10.100.5.117
+LnWebApp12 ansible_host=10.100.5.117
 LnVmWeb13 ansible_host=10.100.5.118
 LnVmWeb14 ansible_host=10.100.5.116
+
+LnWebApp10 ansible_host=10.100.5.210
+LnWebSql10 ansible_host=10.100.5.211
+
 
 [MediaXX]
 #88.99.241.51 #media09
@@ -59,6 +65,8 @@ LnWebAdm01
 
 [1und1-prod-dbservers]
 LnBmSql01
+LnBmSql02
+LnBmSql03
 LnWebSql02
 LnWebSql03
 LnWebSql04
@@ -67,11 +75,11 @@ LnWebSql04
 # DnsNet              
 
 [dnsnet-prod-webservers]
-LnVmWeb11
-LnWebAdm01
+LnWebApp10
+
 
 [dnsnet-prod-dbservers]
-#10.100.5.116
+LnWebSql10
 
 
 # Environment  
@@ -97,7 +105,7 @@ productionmonitor
 ######################
 
 [dnsnet-stage-webservers]
-10.100.5.117
+
 
 [dnsnet-stage-dbservers]
 10.100.5.116
@@ -124,12 +132,12 @@ LnWebDaily01
 LnWebDaily01
 
 [dnsnet-daily-dbservers]
-LnVmWeb12
+LnWebApp12
 LnVmWeb13
 LnVmWeb14
 
 [dnsnet-daily-webservers]
-LnVmWeb12
+LnWebApp12
 LnVmWeb13
 LnVmWeb14
 
@@ -151,10 +159,10 @@ dailywebservers
 ######################
 
 [dnsnet-dev-dbservers]
-LnVmWeb12
+LnWebApp12
 
 [dnsnet-dev-webservers]
-LnVmWeb12
+LnWebApp12
 
 [devwebservers:children]
 dnsnet-dev-webservers

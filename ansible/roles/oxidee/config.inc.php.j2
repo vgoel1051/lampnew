@@ -18,7 +18,7 @@
     $this->dbName = '{{ stage }}_{{ item.database }}'; // database name
     $this->dbUser = '{{ stage }}_{{ item.databaseuser }}'; // database user name
     $this->dbPwd = '{{ item.databasepass }}'; // database user password
-    $this->sShopURL = 'http://{{ item.admin_domain }}'; // eShop base url, required
+    $this->sShopURL = 'https://{{ item.admin_domain }}'; // eShop base url, required
     $this->sSSLShopURL  = null;            // eShop SSL url, optional
     $this->sAdminSSLURL = null;            // eShop Admin SSL url, optional
     $this->sShopDir = '/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs';

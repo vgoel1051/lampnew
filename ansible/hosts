@@ -27,6 +27,7 @@ LnVmWebBL02 ansible_host=10.100.5.210
 
 
 # RZ DB
+LnBmSqlBl01 ansible_host=10.100.5.220
 
 
 [MediaXX]
@@ -72,7 +73,7 @@ LnVmWebBL02
 
 
 [dnsnet-prod-dbservers]
-
+LnBmSqlBl01
 
 
 # Environment  

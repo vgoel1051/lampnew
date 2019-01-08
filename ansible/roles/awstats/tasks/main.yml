@@ -27,6 +27,16 @@
       tags: 
       - awstats
 
+    - name: Create apache2 awstats.conf
+      template:
+        src: templates/conf-available/awstats.conf.j2
+        dest: /etc/apache2/conf-available/awstats.conf
+        owner: www-data
+        group: www-data
+        mode: 0774
+      tags: 
+      - awstats
+
     - name: activate apache2 module
       apache2_module:
         state: present

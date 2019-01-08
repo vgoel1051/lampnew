@@ -69,11 +69,11 @@ LnWebSql04
 # DnsNet              
 
 [dnsnet-prod-webservers]
-LnVmWebBL02
+
 
 
 [dnsnet-prod-dbservers]
-LnBmSqlBl01
+
 
 
 # Environment  
@@ -152,10 +152,10 @@ dailywebservers
 ######################
 
 [dnsnet-dev-dbservers]
-LnWebApp12
+LnBmSqlBl01
 
 [dnsnet-dev-webservers]
-LnWebApp12
+LnVmWebBL02
 
 [devwebservers:children]
 dnsnet-dev-webservers

@@ -1,5 +1,9 @@
 ---
 
+######################
+# all                #
+######################
+
 - hosts: all
   roles:
     - users
@@ -8,7 +12,11 @@
 - hosts: MediaXX
   roles:
     - users
-        
+    
+######################
+# production         #
+######################
+
 - hosts: productiondbservers
   roles:
     - mysql
@@ -29,7 +37,11 @@
     - zabbix-agent
     - hostname
     - awstats
-            
+  
+######################
+# tage               #
+######################
+
 - hosts: stagedbservers   
   roles:
     - mysql
@@ -46,6 +58,9 @@
     - erpcon
     - oxidee
 
+######################
+# daily              #
+######################
 
 - hosts: dailydbservers
   roles:
@@ -68,7 +83,11 @@
     - hostname
     - awstats
                 
-     
+######################
+# dev                #
+######################
+
+
 - hosts: devdbservers
   roles:
     - mysql
@@ -87,3 +106,52 @@
     - oxidee
     - hostname
     - awstats                
+
+######################
+# qdev               #
+######################
+
+- hosts: qdevdbservers
+  roles:
+    - mysql
+    - zabbix-agent
+    - hostname    
+
+- hosts: qdevwebservers
+  vars:    
+    http_port: 80
+  roles:
+#    - gitShopsCerts  
+    - users-sftp  
+    - apache-2
+    - php-5-6
+    - zendguard    
+    - erpcon
+    - oxidee
+    - zabbix-agent
+    - hostname
+
+
+######################
+# qstage             #
+######################
+
+- hosts: qstagedbservers
+  roles:
+    - mysql
+    - zabbix-agent
+    - hostname    
+
+- hosts: qstagewebservers
+  vars:    
+    http_port: 80
+  roles:
+#    - gitShopsCerts  
+    - users-sftp  
+    - apache-2
+    - php-5-6
+    - zendguard    
+    - erpcon
+    - oxidee
+    - zabbix-agent
+    - hostname

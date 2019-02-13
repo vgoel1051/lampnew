@@ -59,5 +59,7 @@
      - {domain: "klarstein.bg", mall: "klarstein"}
      - {domain: "steakreaktor.com", mall: "klarstein"}
      - {domain: "klarstein.com", mall: "klarstein"}  
-     - {domain: "auna-multimedia.com", mall: "klarstein"}
-     
+     - {domain: "auna-multimedia.com", mall: "klarstein"}     
+
+     - {domain: "blumfeldt.de", mall: "blumfeldt"}
+     - {domain: "blumfeldt.com", mall: "blumfeldt"}

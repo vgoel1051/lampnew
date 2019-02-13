@@ -1,5 +1,6 @@
 # Setup/install tasks.
 ---
+   
     - name: Create oxidee admin directory
       file:
         path:  /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin
@@ -26,6 +27,25 @@
  
     - name: 'copy admin .htaccess file'
       template: src=admin/.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/admin/.htaccess
+      with_items: "{{ malls }}" 
+      tags: 
+      - oxidee
+
+
+    - name: 'Create oxidee rest directory'
+      file:
+        path:  /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/rest
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: 
+      - oxidee  
+
+    - name: 'copy rest .htaccess file'
+      template: src=rest/.htaccess.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/rest/.htaccess
       with_items: "{{ malls }}" 
       tags: 
       - oxidee

@@ -2,7 +2,7 @@
  stage: "qstage"
  subdomain: "qstage"
 
- innodb_buffer_pool_size: "4G"
+ innodb_buffer_pool_size: "2G"
  innodb_buffer_pool_instances: "2"
  innodb_thread_concurrency: "4"
 

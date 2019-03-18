@@ -39,24 +39,52 @@
     - awstats
   
 ######################
-# tage               #
+# stage              #
 ######################
 
-- hosts: stagedbservers   
+
+- hosts: stagedbservers
   roles:
     - mysql
-
+    - hostname
+    
 - hosts: stagewebservers
   vars:    
     http_port: 80
   roles:
-#    - gitShopsCerts
-    - users-sftp
+#    - gitShopsCerts  
+    - users-sftp  
     - apache-2
     - php-5-6
-    - zendguard
+    - zendguard    
     - erpcon
     - oxidee
+    - hostname
+    - awstats  
+
+######################
+# qa                 #
+######################
+
+
+- hosts: qadbservers
+  roles:
+    - mysql
+    - hostname
+    
+- hosts: qawebservers
+  vars:    
+    http_port: 80
+  roles:
+#    - gitShopsCerts  
+    - users-sftp  
+    - apache-2
+    - php-5-6
+    - zendguard    
+    - erpcon
+    - oxidee
+    - hostname
+    - awstats     
 
 ######################
 # daily              #
@@ -148,6 +176,30 @@
   roles:
 #    - gitShopsCerts  
     - users-sftp  
+    - apache-2
+    - php-5-6
+    - zendguard    
+    - erpcon
+    - oxidee
+    - zabbix-agent
+    - hostname
+
+######################
+# local              #
+######################
+
+- hosts: localdbservers
+  roles:
+    - mysql
+    - zabbix-agent
+    - hostname    
+
+- hosts: localwebservers
+  vars:    
+    http_port: 80
+  roles:
+#    - gitShopsCerts  
+#    - users-sftp  
     - apache-2
     - php-5-6
     - zendguard    

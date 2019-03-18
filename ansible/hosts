@@ -33,9 +33,12 @@ LnVmWebBL02 ansible_host=10.100.5.210
 LnBmSqlBl01 ansible_host=10.100.5.220
 
 # RZ-Stage
-LnVmWebBL03 ansible_host=10.100.5.129 		# esb02
-LnVmWebBL04 ansible_host=10.100.5.130 		# esb02
+LnVmWebBL03 ansible_host=10.100.5.129 		# Quibiq
+LnVmWebBL04 ansible_host=10.100.5.130 		# Quibiq
 
+
+LnVmWebBL06 ansible_host=10.100.5.101 		# Quibiq
+LnVmWebBL07 ansible_host=10.100.5.102 		# Quibiq
 
 [MediaXX]
 #88.99.241.51 #media09
@@ -45,8 +48,8 @@ LnVmWebBL04 ansible_host=10.100.5.130 		# esb02
 10.100.5.21
 10.100.2.230
 
-
-
+[local]
+DevLnShopVM01 ansible_host=192.168.12.200 
 
 ######################
 # Production         #
@@ -109,9 +112,10 @@ productionmonitor
 ######################
 
 [dnsnet-stage-webservers]
+LnVmWebBL06
 
 [dnsnet-stage-dbservers]
-10.100.5.116
+LnVmWebBL06
 
 [stagewebservers:children]
 dnsnet-stage-webservers
@@ -123,6 +127,26 @@ dnsnet-stage-dbservers
 stagewebservers
 stagedbservers
 
+
+######################
+# qa                 #
+######################
+
+[dnsnet-qa-webservers]
+LnVmWebBL07
+
+[dnsnet-qa-dbservers]
+LnVmWebBL07
+
+[qawebservers:children]
+dnsnet-qa-webservers
+
+[qadbservers:children]
+dnsnet-qa-dbservers
+
+[qa:children]
+qawebservers
+qadbservers
 
 ######################
 # Daily              #
@@ -221,3 +245,25 @@ dnsnet-qstage-dbservers
 [qstage:children]
 qstagedbservers
 qstagewebservers
+
+
+######################
+# local              #
+######################
+
+[local-dbservers]
+DevLnShopVM01
+
+[local-webservers]
+DevLnShopVM01
+
+[localwebservers:children]
+local-webservers
+
+[localdbservers:children]
+local-dbservers
+
+[local:children]
+localdbservers
+localwebservers
+

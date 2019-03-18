@@ -28,7 +28,6 @@ sftp_users:
        - www-data
      mount_points: []
 #       - {name: "htdocs_malls", path: "/var/www/malls/{{ stage }}/estar/htdocs/out/media"}
-
       
    - username: estar-sftp
      name: estar-sftp    
@@ -90,6 +89,18 @@ sftp_users:
        - www-data
      mount_points:
        - {name: "media_auna", path: "/var/www/malls/{{ stage }}/auna/htdocs/out/media"}
+
+   - username: chaltecblumfeldt_sftp
+     name: chaltecblumfeldt_sftp    
+     password: '$1$somesalt$RaaelHIyZB0k/zY.ZUR6k.'
+     authorized_keys: []
+     home: /home/blumfeldt-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "media_blumfeldt", path: "/var/www/malls/{{ stage }}/blumfeldt/htdocs/out/media"}
         
 sftp_users_group: ftp
 # default user groups

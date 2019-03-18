@@ -61,5 +61,9 @@
      - {domain: "klarstein.com", mall: "klarstein"}  
      - {domain: "auna-multimedia.com", mall: "klarstein"}     
 
-     - {domain: "blumfeldt.de", mall: "blumfeldt"}
+     - {domain: "blumfeldt.co.uk", mall: "blumfeldt"}
      - {domain: "blumfeldt.com", mall: "blumfeldt"}
+     - {domain: "blumfeldt.de", mall: "blumfeldt"}
+     - {domain: "blumfeldt.es", mall: "blumfeldt"}
+     - {domain: "blumfeldt.fr", mall: "blumfeldt"}
+     - {domain: "blumfeldt.it", mall: "blumfeldt"}

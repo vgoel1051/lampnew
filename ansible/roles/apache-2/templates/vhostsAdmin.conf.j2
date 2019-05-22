@@ -21,7 +21,7 @@
     <VirtualHost *:443>
 
     ServerAdmin webmaster@{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] , '') }}
-    ServerName {{ item.admin_domain  | replace(item.admin_domain.split(".")[0] , '') }}
+    ServerName {{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}
     ServerAlias {{ item.admin_domain }}
 	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
 

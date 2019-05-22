@@ -41,7 +41,9 @@
       with_items: "{{ vhost_sites }}"      
       tags: 
       - apache2
-      - apache2_vhosts      
+      - apache2_vhosts    
+      - apache2_vhosts_shops    
+            
     - name: a2ensite {{ subdomain }}.{{ item['domain'] }}
       command: a2ensite {{ subdomain }}.{{ item['domain'] }}
       args:
@@ -51,7 +53,8 @@
       - restart apache2  
       tags: 
       - apache2
-      - apache2_vhosts        
+      - apache2_vhosts    
+      - apache2_vhosts_shops       
       
     - name: Create auth_users
       template:

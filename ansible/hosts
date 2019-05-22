@@ -37,8 +37,8 @@ LnVmWebBL03 ansible_host=10.100.5.129 		# Quibiq
 LnVmWebBL04 ansible_host=10.100.5.130 		# Quibiq
 
 
-LnVmWebBL06 ansible_host=10.100.5.101 		# Quibiq
-LnVmWebBL07 ansible_host=10.100.5.102 		# Quibiq
+LnVmWebBL06 ansible_host=10.100.5.101 		# Stage
+LnVmWebBL07 ansible_host=10.100.5.102 		# qa
 
 [MediaXX]
 #88.99.241.51 #media09
@@ -68,7 +68,7 @@ LnVmWeb05
 LnVmWeb06
 LnVmWeb07
 LnVmWeb08
-LnVmWeb09
+#LnVmWeb09
 LnWebAdm01
 
 
@@ -186,7 +186,7 @@ dailywebservers
 ######################
 
 [dnsnet-dev-dbservers]
-LnBmSqlBl01
+LnVmWebBL02
 
 [dnsnet-dev-webservers]
 LnVmWebBL02

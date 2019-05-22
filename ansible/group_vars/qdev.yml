@@ -2,7 +2,9 @@
  stage: "qdev"
  subdomain: "qdev"
 
- innodb_buffer_pool_size: "4G"
+ mysqluser: "quibiqsql"
+
+ innodb_buffer_pool_size: "1G"
  innodb_buffer_pool_instances: "2"
  innodb_thread_concurrency: "4"
 

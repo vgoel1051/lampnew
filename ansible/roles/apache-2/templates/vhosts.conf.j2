@@ -27,7 +27,8 @@
     <VirtualHost *:443>
 	ServerAdmin webmaster@{{ item.domain }}
 	ServerName {{ item.domain }}
-	ServerAlias {{ subdomain }}.{{ item.domain }}
+	ServerAlias {{ subdomain }}.{{ item.domain }}  {% if subdomain ==  stage  %}*.{{ item.domain }}{% endif %}
+
 	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
 
 	SSLEngine on

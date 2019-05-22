@@ -61,6 +61,22 @@
    tags: mysql    
     
     
+ - name: Update MySQL password for specific all {{ quibiqsql }} accounts
+   mysql_user: 
+     name: "{{ quibiqsql }}"
+     host: "{{ item }}" 
+     password: "{{ mysql_deployjenkins_pass }}"
+     priv: '*.*:ALL,GRANT'
+     state: present
+   with_items:
+     - "{{ ansible_hostname }}"
+     - 127.0.0.1
+     - ::1
+     - localhost  
+     - "%"     
+   tags: mysql    
+    
+
  - name: Copy the root credentials as .my.cnf file
    template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
    tags: mysql

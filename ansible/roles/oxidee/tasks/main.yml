@@ -49,3 +49,22 @@
       with_items: "{{ malls }}" 
       tags: 
       - oxidee
+
+
+    - name: 'Create oxidee wysiwigpro directory'
+      file:
+        path:  /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/core/wysiwigpro
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: 
+      - oxidee  
+
+    - name: 'copy wysiwigpro .confic.inc file'
+      template: src=core/wysiwigpro/config.inc.php.j2 dest=/var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/core/wysiwigpro/config.inc.php
+      with_items: "{{ malls }}" 
+      tags: 
+      - oxidee

@@ -2,7 +2,7 @@
  stage: "daily"
  subdomain: "daily"
 
- innodb_buffer_pool_size: "4G"
+ innodb_buffer_pool_size: "1G"
  innodb_buffer_pool_instances: "2"
  innodb_thread_concurrency: "4"
 

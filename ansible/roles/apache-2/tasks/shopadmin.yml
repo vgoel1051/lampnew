@@ -3,7 +3,10 @@
         src: templates/vhostsAdmin.conf.j2
         dest: /etc/apache2/sites-available/{{ item['admin_domain'] }}.conf
       with_items: "{{ malls }}"      
-      tags: apache2
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_apc
 
     - name: disable  default site
       file:
@@ -19,5 +22,8 @@
       with_items: "{{ malls }}"
       notify:
       - restart apache2
-      tags: apache2
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_apc
       

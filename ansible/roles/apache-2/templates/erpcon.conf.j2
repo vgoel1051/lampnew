@@ -1,7 +1,7 @@
 <VirtualHost *:80>
 
     ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
-    ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] + "." , '') }}
+    ServerName {{ item.erpcon }}
     ServerAlias {{ item.erpcon }}
     DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web
 
@@ -21,7 +21,7 @@
     <VirtualHost *:443>
 
     ServerAdmin webmaster@{{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
-    ServerName {{ item.erpcon  | replace(item.erpcon.split(".")[0] , '') }}
+    ServerName {{ item.erpcon }}
     ServerAlias {{ item.erpcon }}
 	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/erpcon/web
 

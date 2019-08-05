@@ -207,3 +207,24 @@
     - oxidee
     - zabbix-agent
     - hostname
+
+######################
+# front              #
+######################
+- hosts: frontdevdbservers
+  roles:
+    - mysql
+    - hostname
+    
+- hosts: frontdevwebservers
+  vars:    
+    http_port: 80
+  roles:
+#    - gitShopsCerts  
+    - users-sftp  
+    - apache-2
+    - php-5-6
+    - zendguard    
+    - erpcon
+    - oxidee
+    - hostname              

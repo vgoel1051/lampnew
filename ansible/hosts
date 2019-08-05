@@ -36,9 +36,11 @@ LnBmSqlBl01 ansible_host=10.100.5.220
 LnVmWebBL03 ansible_host=10.100.5.129 		# Quibiq
 LnVmWebBL04 ansible_host=10.100.5.130 		# Quibiq
 
-
 LnVmWebBL06 ansible_host=10.100.5.101 		# Stage
 LnVmWebBL07 ansible_host=10.100.5.102 		# qa
+
+LnVmWebBL09 ansible_host=10.100.5.104 		# frontdev
+
 
 [MediaXX]
 #88.99.241.51 #media09
@@ -267,3 +269,22 @@ local-dbservers
 localdbservers
 localwebservers
 
+######################
+# frontdev           #
+######################
+
+[frontdev-dbservers]
+LnVmWebBL09
+
+[frontdev-webservers]
+LnVmWebBL09
+
+[frontdevwebservers:children]
+frontdev-webservers
+
+[frontdevdbservers:children]
+frontdev-dbservers
+
+[frontdev:children]
+frontdevdbservers
+frontdevwebservers

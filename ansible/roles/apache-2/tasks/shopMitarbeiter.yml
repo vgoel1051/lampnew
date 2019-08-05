@@ -1,0 +1,22 @@
+    - name: Create apache2 admin vhosts
+      template:
+        src: templates/vhostsMitarbeiter.conf.j2
+        dest: /etc/apache2/sites-available/{{ item['subdomain'] }}.{{ item['domain'] }}.conf
+      with_items: "{{ mitarbeiterShops }}"      
+      tags: 
+      - apache2
+      - apache2_vhosts
+      - apache2_vhosts_mitarbeiter
+      
+    - name: a2ensite {{ item['subdomain'] }}.{{ item['domain'] }}
+      command: a2ensite {{ item['subdomain'] }}.{{ item['domain'] }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ item['subdomain'] }}.{{ item['domain'] }}.conf
+      with_items: "{{ mitarbeiterShops }}"
+      notify:
+      - restart apache2
+      tags: 
+      - apache2
+      - apache2_vhosts
+      - apache2_vhosts_mitarbeiter
+      

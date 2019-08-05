@@ -1,0 +1,48 @@
+<VirtualHost *:80>
+
+    ServerAdmin webmaster@{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}
+    ServerName {{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}
+    ServerAlias {{ item.admin_domain }}
+    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs
+
+    <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
+	Options Indexes FollowSymLinks MultiViews
+	# changed from None to FileInfo
+	AllowOverride All
+	Order allow,deny
+	allow from all
+    </Directory>
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	SSLStaplingCache shmcb:/tmp/stapling_cache(128000)
+
+    <VirtualHost *:443>
+
+    ServerAdmin webmaster@{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] , '') }}
+    ServerName {{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}
+    ServerAlias {{ item.admin_domain }}
+	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
+
+	SSLEngine on
+
+	SSLCertificateFile /etc/apache2/ssl/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}/ssl_certificate.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}.key
+
+	SSLCACertificateFile /etc/apache2/ssl/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}/IntermediateCA.crt
+	SSLUseStapling on
+
+	<Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
+	    Options Indexes FollowSymLinks MultiViews
+	    AllowOverride All
+	    Order allow,deny
+	    allow from all
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}_error.log
+	CustomLog ${APACHE_LOG_DIR}/{{ item.admin_domain  | replace(item.admin_domain.split(".")[0] + "." , '') }}_access.log combined
+
+    </VirtualHost>
+
+</IfModule>

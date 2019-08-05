@@ -1,0 +1,107 @@
+---
+ - name: Install a list of packages
+   apt:
+     name: "{{ packages }}"
+     update_cache: yes
+   vars:
+     packages:
+     - mc
+     - htop
+     - iftop
+     - rsync
+   tags: user     
+   
+
+ - name: create group Root id_rsa file
+   template: 
+     src: templates/keys/root/id_rsa
+     dest: /root/.ssh/id_rsa
+     owner: "root"
+     group: "root"
+     mode: '0600'  
+
+
+ - debug: msg="{{ lookup('env','HOME') }} is an environment variable"
+ - name: Create a login user
+   user:
+     name: "{{ item.name }}"
+     password: "{{ item.pass }}"
+     update_password: on_create     
+     groups: "{{ item.groups }}"
+     state: present
+     shell: /bin/bash     
+     createhome: yes        
+     home: /home/{{ item.name }}
+     append: yes
+   with_items: "{{ consoleusers }}"
+   tags: user    
+
+ - name: set Usersdirectory permission
+   file:
+     path: /home/{{ item.name }}
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: 0775
+   with_items: "{{ consoleusers }}"
+   tags: user    
+   
+ - name: Add .ssh directories
+   file:
+     path=/home/{{ item.name }}/.ssh
+     state=directory
+     mode=0700
+     owner={{ item.name }}
+     group={{ item.name }}  
+   with_items: "{{ consoleusers }}"
+   tags: user    
+   
+ - name: Copy id_rsa.pub file
+   template: 
+     src: templates/keys/{{ item.name }}/id_rsa.pub
+     dest: /home/{{ item.name }}/.ssh/id_rsa.pub
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0644'
+   with_items: "{{ consoleusers }}"
+   tags: user    
+   
+ - name: Copy id_rsa file
+   template: 
+     src: templates/keys/{{ item.name }}/id_rsa
+     dest: /home/{{ item.name }}/.ssh/id_rsa
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0600'
+   with_items: "{{ consoleusers }}"
+   tags: user    
+
+ - name: Adding authorized keys
+   template: 
+     src: authorized_keys.j2
+     dest: /home/{{ item.name }}/.ssh/authorized_keys
+     owner: "{{ item.name }}"
+     group: "{{ item.name }}"
+     mode: '0644'
+   with_items: "{{ consoleusers }}"
+   tags: user    
+
+
+ - name: Ansible create sudoers file if it doesn't exist 
+   file:
+     path: "/etc/sudoers.d/sudoers"
+     state: touch
+
+ - name: add user fpr passwordless sudo
+   lineinfile:
+     dest: /etc/sudoers.d/sudoers
+     state: present
+     regexp: '^%{{ item }}'
+     line: '%{{ item }} ALL=(ALL) NOPASSWD: ALL'
+     validate: 'visudo -cf %s'
+   with_items: "{{ sudoers }}"         
+   tags: 
+     - user   
+     - user_sudoers
+   
+
+ 

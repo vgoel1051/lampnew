@@ -1,0 +1,77 @@
+---
+
+ - name: Update MySQL password for all {{ mysql_rootuser }} accounts
+   mysql_user: 
+     name: "{{ mysql_rootuser }}"
+     host: "{{ item }}" 
+     password: "{{ mysql_root_pass }}"
+     priv: '*.*:ALL,GRANT'
+     check_implicit_admin: yes
+     login_user: "{{ mysql_rootuser }}"
+     login_password: "{{ mysql_root_pass }}"         
+     state: present
+   with_items:
+     - "{{ ansible_hostname }}"
+     - 127.0.0.1
+     - ::1
+     - localhost     
+   tags: mysql
+
+ - name: Update MySQL password for all {{ mysql_user }} accounts
+   mysql_user: 
+     name: "{{ stage }}_{{ item.databaseuser }}"
+     host: localhost
+     password: "{{ item.databasepass }}"
+     priv: '*.*:ALL,GRANT'
+     state: present
+   with_items: "{{ malls }}"
+   tags: mysql
+
+ - name: Update MySQL password for all {{ mysql_user }} accounts
+   mysql_user: 
+     name: "{{ stage }}_{{ item.databaseuser }}"
+     host: "%"
+     password: "{{ item.databasepass }}"
+     priv: '*.*:ALL,GRANT'
+     state: present
+   with_items: "{{ malls }}"
+   tags: mysql   
+   
+ - name: Create a new {{ stage }} database user with name 
+   mysql_db:
+     name: '{{ stage }}_{{ item.database }}'
+     state: present
+   with_items: "{{ malls }}"
+   tags: mysql   
+   
+
+ - name: Update MySQL password for all {{ mysql_user }} accounts
+   mysql_user: 
+     name: "{{ mysql_user }}"
+     host: "{{ item }}" 
+     password: "{{ mysql_deployjenkins_pass }}"
+     priv: '*.*:ALL,GRANT'
+     state: present
+   with_items:
+     - "{{ ansible_hostname }}"
+     - 127.0.0.1
+     - ::1
+     - localhost  
+     - "%"     
+   tags: mysql    
+
+ - name: Copy the root credentials as .my.cnf file
+   template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+   tags: mysql
+   
+ - name: Removes all anonymous user accounts
+   mysql_user:
+     name: ''
+     host: "{{ item }}"
+     state: absent
+   with_items:
+     - "{{ ansible_hostname }}"
+     - 127.0.0.1
+     - ::1
+     - localhost     
+   tags: mysql

@@ -1,0 +1,215 @@
+# In case you want to add a .htpasswd authentification
+# you'll have to add the host of the shop as an allowed entity,
+# so that calls from the host skip the authentification
+# Example:
+# Order Deny,Allow
+# Deny from All
+# AuthType Basic
+# AuthName "Access not allowed"
+# AuthUserFile path_to_htpasswd_file/.htpasswd
+# Require valid-user
+# Allow from localhost
+# Satisfy Any
+AddType text/javascript .template
+
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+
+    RewriteBase /
+    
+    RewriteCond %{HTTP_HOST} !^{{ subdomain }}\. [NC]
+    RewriteCond %{HTTP_HOST} !^mitarbeiter\. [NC]
+    RewriteCond %{HTTP_HOST} !^{{ item.admin_subdomain  }}\. [NC]
+    RewriteRule .* https://{{ subdomain }}.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    RewriteCond %{REQUEST_URI}     config\.inc\.php [NC]
+    RewriteRule ^config\.inc\.php  index\.php       [R=301,L]
+    RewriteRule ^default\.aspx  index\.php       [R=301,L]
+
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+    RewriteRule .* - [F]
+
+    RewriteCond %{REQUEST_URI} oxseo\.php$
+    RewriteCond %{QUERY_STRING} mod_rewrite_module_is=off
+    RewriteRule oxseo\.php$ oxseo.php?mod_rewrite_module_is=on [L]
+
+    RewriteCond %{REQUEST_URI} !(\/admin\/|\/core\/|\/application\/|\/export\/|\/modules\/|\/out\/|\/setup\/|\/tmp\/|\/views\/)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule !(\.html|\/|\.jpg|\.css|\.pdf|\.doc|\.gif|\.png|\.js|\.htc|\.svg)$ %{REQUEST_URI}/ [R=301,L]
+
+    RewriteCond %{REQUEST_URI} !(\/admin\/|\/core\/|\/application\/|\/export\/|\/modules\/|\/out\/|\/setup\/|\/tmp\/|\/views\/)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (\.html|\/)$ oxseo.php
+
+
+    RewriteCond %{REQUEST_URI} (\/out\/pictures\/generated\/)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (\.jpe?g|\.gif|\.png|\.svg)$ getimg.php
+
+    RewriteRule ^(vendor/) - [F,L,NC]
+</IfModule>
+
+
+<IfModule mod_expires.c>
+
+    ExpiresActive on
+    ExpiresDefault                                    "access plus 1 day"
+
+    # DATA
+    ExpiresByType text/xml                            "access plus 0 seconds"
+    ExpiresByType text/html                           "access plus 0 seconds"
+    ExpiresByType text/plain                          "access plus 0 seconds"
+    ExpiresByType application/xml                     "access plus 0 seconds"
+    ExpiresByType application/json                    "access plus 0 seconds"
+    ExpiresByType application/rss+xml                 "access plus 1 hour"
+    ExpiresByType application/atom+xml                "access plus 1 hour"
+    ExpiresByType text/x-component                    "access plus 1 hour"
+
+    # MANIFEST
+    ExpiresByType application/x-web-app-manifest+json "access plus 0 seconds"
+    ExpiresByType text/cache-manifest                 "access plus 0 seconds"
+
+    # SCRIPTS
+    ExpiresByType text/css                            "access plus 1 day"
+    ExpiresByType text/javascript                     "access plus 1 day"
+    ExpiresByType application/javascript              "access plus 1 day"
+    ExpiresByType application/x-javascript            "access plus 1 day"
+    ExpiresByType script/js                                                "access plus 1 day"
+    ExpiresByType stylesheet/css                                           "access plus 1 day"
+
+    # IMAGES
+    ExpiresByType image/gif                           "access plus 1 day"
+    ExpiresByType image/png                           "access plus 1 day"
+    ExpiresByType image/jpe                           "access plus 1 day"
+    ExpiresByType image/jpg                           "access plus 1 day"
+    ExpiresByType image/jpeg                          "access plus 1 day"
+    ExpiresByType image/jp2                           "access plus 1 day"
+    ExpiresByType image/pipeg                         "access plus 1 day"
+    ExpiresByType image/bmp                           "access plus 1 day"
+    ExpiresByType image/tiff                          "access plus 1 day"
+    ExpiresByType image/svg+xml                       "access plus 1 day"
+    ExpiresByType image/vnd.microsoft.icon            "access plus 1 day"
+
+    # ICONS
+    ExpiresByType image/ico                           "access plus 1 day"
+    ExpiresByType image/icon                          "access plus 1 day"
+    ExpiresByType text/ico                            "access plus 1 day"
+    ExpiresByType image/x-ico                         "access plus 1 day"
+    ExpiresByType image/x-icon                        "access plus 1 day"
+    ExpiresByType application/ico                     "access plus 1 day"
+
+    # AUDIO
+    ExpiresByType audio/ogg                           "access plus 1 day"
+    ExpiresByType audio/basic                         "access plus 1 day"
+    ExpiresByType audio/mid                           "access plus 1 day"
+    ExpiresByType audio/midi                          "access plus 1 day"
+    ExpiresByType audio/mpeg                          "access plus 1 day"
+    ExpiresByType audio/x-aiff                        "access plus 1 day"
+    ExpiresByType audio/x-mpegurl                     "access plus 1 day"
+    ExpiresByType audio/x-pn-realaudio                "access plus 1 day"
+    ExpiresByType audio/x-wav                         "access plus 1 day"
+
+    # VIDEO
+    ExpiresByType video/ogg                           "access plus 1 day"
+    ExpiresByType video/mp4                           "access plus 1 day"
+    ExpiresByType video/webm                          "access plus 1 day"
+    ExpiresByType video/x-msvideo                     "access plus 1 day"
+    ExpiresByType video/mpeg                          "access plus 1 day"
+    ExpiresByType video/quicktime                     "access plus 1 day"
+    ExpiresByType video/x-la-asf                      "access plus 1 day"
+    ExpiresByType video/x-ms-asf                      "access plus 1 day"
+    ExpiresByType x-world/x-vrml                      "access plus 1 day"
+
+    # FONTS
+    ExpiresByType font/truetype                       "access plus 1 month"
+    ExpiresByType font/opentype                       "access plus 1 month"
+    ExpiresByType application/x-font-ttf              "access plus 1 month"
+    ExpiresByType application/x-font-woff             "access plus 1 month"
+    ExpiresByType application/font-woff               "access plus 1 month"
+    ExpiresByType application/vnd.ms-fontobject       "access plus 1 month"
+
+    # FLASH
+    ExpiresByType application/x-shockwave-flash       "access plus 1 day"
+    ExpiresByType video/x-flv                         "access plus 1 day"
+
+    # OTHERS
+    ExpiresByType application/pdf                     "access plus 1 day"
+    ExpiresByType image/vnd.wap.wbmp                  "access plus 1 day"
+    ExpiresByType application/vnd.wap.wbxml           "access plus 1 day"
+    ExpiresByType application/smil                    "access plus 1 day"
+
+    <IfModule mod_headers.c>
+        Header append Cache-Control "public"
+    </IfModule>
+
+</IfModule>
+
+<IfModule mod_deflate.c>
+     AddOutputFilterByType DEFLATE text/plain
+     AddOutputFilterByType DEFLATE text/html
+     AddOutputFilterByType DEFLATE text/xml
+     AddOutputFilterByType DEFLATE text/css
+     AddOutputFilterByType DEFLATE text/javascript
+     AddOutputFilterByType DEFLATE application/xml
+     AddOutputFilterByType DEFLATE application/xhtml+xml
+     AddOutputFilterByType DEFLATE application/rss+xml
+     AddOutputFilterByType DEFLATE application/atom_xml
+     AddOutputFilterByType DEFLATE application/javascript
+     AddOutputFilterByType DEFLATE application/x-javascript
+     AddOutputFilterByType DEFLATE application/x-shockwave-flash
+</IfModule>
+
+
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
+
+<ifmodule mod_headers.c>
+    <filesmatch "\\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </filesmatch>
+    <filesmatch "\\.(css)$">
+        Header set Cache-Control "max-age=604800, public"
+    </filesmatch>
+    <filesmatch "\\.(js)$">
+        Header set Cache-Control "max-age=216000, private"
+    </filesmatch>
+    <filesmatch "\\.(js?)$">
+        Header set Cache-Control "max-age=216000, private"
+    </filesmatch>
+</ifmodule>
+
+
+# Deny access to console application entry point from HTTP
+<Files "oxid">
+    order allow,deny
+    deny from all
+</Files>
+
+# disabling log file access from outside
+<FilesMatch "(EXCEPTION_LOG\.txt|\.log|\.tpl|pkg\.rev|\.ini|pkg\.info|\.pem|composer\.json|composer\.lock|test_config\.yml)$">
+    order allow,deny
+    deny from all
+</FilesMatch>
+
+# Prevent .ht* files from being sended to outside requests
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+</Files>
+
+Options -Indexes
+DirectoryIndex index.php index.html
+
+#order deny,allow
+#allow from 213.61.70.222
+#allow from 217.70.137.146
+#allow from 86.110.230.145
+#allow from 88.99.216.223
+#allow from localhost
+#deny from all

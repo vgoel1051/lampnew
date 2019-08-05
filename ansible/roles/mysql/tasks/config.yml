@@ -1,0 +1,15 @@
+---
+# tasks file for mysql
+    - name: 'MySQL config file'
+      template: src=my.cnf.j2 dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+      sudo: yes
+      tags: 
+      - mysql
+      - mysql_config
+
+    - name: 'Restart MySQL'
+      service: name=mysql state=restarted
+      tags: 
+      - mysql
+      - mysql_config
+

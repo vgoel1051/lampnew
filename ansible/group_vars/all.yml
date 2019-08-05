@@ -1,0 +1,77 @@
+ mysql_user: deployjenkins 
+ mysql_deployjenkins_pass: WCoPUzkAS!nW4qoMCcSTg
+
+ mysql_rootuser: root
+ mysql_root_pass: nbsPtrtAgGkhTfdjp52D
+ 
+ vhost_sites:   
+ 
+     - {domain: "auna.de", mall: "auna"}
+     - {domain: "auna.fr", mall: "auna"}
+     - {domain: "auna.it", mall: "auna"}
+     - {domain: "auna-multimedia.co.uk", mall: "auna"}
+     
+     - {domain: "auna-multimedia.es", mall: "auna"}     
+     
+#     - {domain: "capitalsports.de", mall: "cs"}
+     
+     - {domain: "electronic-star.cz", mall: "sk"}
+     - {domain: "electronic-star.sk", mall: "sk"}
+     - {domain: "electronic-star.hu", mall: "sk"}
+     - {domain: "electronic-star.si", mall: "sk"}
+     - {domain: "electronic-star.hr", mall: "sk"}
+     - {domain: "electronic-star.ro", mall: "sk"}
+     - {domain: "electronic-star.bg", mall: "sk"}
+     - {domain: "famtastic.cz", mall: "sk"}
+     - {domain: "famtastic.sk", mall: "sk"}
+     - {domain: "famtastic.hu", mall: "sk"}
+     - {domain: "famtastic.si", mall: "sk"}
+     - {domain: "famtastic.hr", mall: "sk"}
+     - {domain: "famtastic.ro", mall: "sk"}
+     - {domain: "famtastic.bg", mall: "sk"}   
+     
+     - {domain: "electronic-star.be", mall: "estar"}
+     - {domain: "electronic-star.ch", mall: "estar"}
+     - {domain: "electronic-star.es", mall: "estar"}
+     - {domain: "electronic-star.fi", mall: "estar"}
+     - {domain: "electronic-star.fr", mall: "estar"}
+     - {domain: "electronic-star.it", mall: "estar"}
+     - {domain: "electronic-star.nl", mall: "estar"}
+     - {domain: "electronic-star.pl", mall: "estar"}
+     - {domain: "electronic-star.pt", mall: "estar"}
+     - {domain: "electronic-star.se", mall: "estar"}
+     - {domain: "elektronik-star.at", mall: "estar"}
+     - {domain: "elektronik-star.de", mall: "estar"}
+     - {domain: "hifi-tower.co.uk", mall: "estar"}
+     - {domain: "hifi-tower.ie", mall: "estar"}
+     
+     - {domain: "klarstein.de", mall: "klarstein"}
+     - {domain: "klarstein.it", mall: "klarstein"}
+     - {domain: "klarstein.fr", mall: "klarstein"}
+     - {domain: "klarstein.es", mall: "klarstein"}
+     - {domain: "klarstein.co.uk", mall: "klarstein"}
+     - {domain: "klarstein.cz", mall: "klarstein"}
+     - {domain: "klarstein.sk", mall: "klarstein"}
+     - {domain: "klarstein.hu", mall: "klarstein"}
+     - {domain: "klarstein.si", mall: "klarstein"}
+     - {domain: "klarstein.hr", mall: "klarstein"}
+     - {domain: "klarstein.ro", mall: "klarstein"}
+     - {domain: "klarstein.bg", mall: "klarstein"}
+     - {domain: "klarstein.at", mall: "klarstein"}
+     - {domain: "klarstein.be", mall: "klarstein"}
+     - {domain: "klarstein.fi", mall: "klarstein"}
+     - {domain: "klarstein.nl", mall: "klarstein"}
+     - {domain: "klarstein.pl", mall: "klarstein"}
+     - {domain: "klarstein.pt", mall: "klarstein"}
+     - {domain: "klarstein.se", mall: "klarstein"}
+     
+     - {domain: "steakreaktor.com", mall: "klarstein"}
+     - {domain: "klarstein.com", mall: "klarstein"}  
+     - {domain: "auna-multimedia.com", mall: "klarstein"}     
+
+     - {domain: "blumfeldt.co.uk", mall: "blumfeldt"}
+     - {domain: "blumfeldt.com", mall: "blumfeldt"}
+     - {domain: "blumfeldt.de", mall: "blumfeldt"}
+     - {domain: "blumfeldt.es", mall: "blumfeldt"}
+     - {domain: "blumfeldt.fr", mall: "blumfeldt"}
+     - {domain: "blumfeldt.it", mall: "blumfeldt"}

@@ -1,0 +1,10 @@
+---
+
+  - name: create crom Clear Cache
+    cron: 
+      name: "Clear Cache"
+      user: "root"
+      minute: "30"
+      hour: "03"
+      job: "php /var/www/html/app/artisan cache:clear"
+         

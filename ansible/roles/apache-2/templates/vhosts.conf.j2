@@ -1,0 +1,61 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@{{ item.domain }}
+    ServerName {{ item.domain }}
+    ServerAlias {{ subdomain }}.{{ item.domain }}
+    DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs
+
+    <Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
+		Options Indexes FollowSymLinks MultiViews
+		# changed from None to FileInfo
+		AllowOverride All
+		Order allow,deny
+		allow from all
+    </Directory>
+
+	<Directory /usr/lib/cgi-bin/>
+	  AuthName "Enter Your User Name and Password"
+	  AuthType Basic
+	  AuthUserFile /etc/apache2/auth_users
+	  Require valid-user
+	</Directory>
+
+</VirtualHost>
+
+<IfModule mod_ssl.c>
+	SSLStaplingCache shmcb:/tmp/stapling_cache(128000)
+
+    <VirtualHost *:443>
+	ServerAdmin webmaster@{{ item.domain }}
+	ServerName {{ item.domain }}
+	ServerAlias {{ subdomain }}.{{ item.domain }}  {% if subdomain ==  stage  %}*.{{ item.domain }}{% endif %}
+
+	DocumentRoot /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/
+
+	SSLEngine on
+
+	SSLCertificateFile /etc/apache2/ssl/{{ item.domain }}/ssl_certificate.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/{{ item.domain }}/{{ item.domain }}.key
+
+	SSLCACertificateFile /etc/apache2/ssl/{{ item.domain }}/IntermediateCA.crt
+	SSLUseStapling on
+
+	<Directory /var/www/malls/{{ stage }}/{{ item.mall }}/htdocs/>
+	    Options Indexes FollowSymLinks MultiViews
+	    AllowOverride All
+	    Order allow,deny
+	    allow from all
+	</Directory>
+
+	<Directory /usr/lib/cgi-bin/>
+	  AuthName "Enter Your User Name and Password"
+	  AuthType Basic
+	  AuthUserFile /etc/apache2/auth_users
+	  Require valid-user
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/{{ item.domain }}_error.log
+	CustomLog ${APACHE_LOG_DIR}/{{ item.domain }}_access.log combined
+
+    </VirtualHost>
+
+</IfModule>

@@ -1,0 +1,290 @@
+
+#Redis
+LNWebRedis01  ansible_host=82.165.163.97 	#192.168.40.100 
+
+# 1und1 WEB
+LnWebAdm01  ansible_host=93.90.207.90 		#192.168.40.7
+LnVmWeb02 ansible_host=82.165.251.190 		#192.168.40.122
+LnVmWeb03 ansible_host=82.165.250.53		#192.168.40.123
+LnVmWeb04 ansible_host=212.227.175.58		#192.168.40.124
+LnVmWeb05 ansible_host=212.227.10.229		#192.168.40.125
+LnVmWeb06 ansible_host=82.165.68.88 		#192.168.40.126
+LnVmWeb07 ansible_host=93.90.205.107		#192.168.40.127
+LnVmWeb08 ansible_host=82.165.101.229		#192.168.40.128
+LnVmWeb09 ansible_host=87.106.157.248		#192.168.40.129
+
+LnWebDaily01 ansible_host=82.165.97.199		#192.168.40.199
+
+
+# 1und1 DB
+LnBmSql01 ansible_host=217.160.11.145		# auna
+LnBmSql02 ansible_host=93.90.192.106		# estar
+LnBmSql03 ansible_host=93.90.192.225		# sk
+LnWebSql04 ansible_host=82.165.69.130 		# klarstein	192.168.40.14
+LnWebSql05 ansible_host=217.160.14.187 		# blumfeldt
+
+DevLnVmWebBL10 ansible_host=10.100.5.127    # SelfServiceReturn DEV
+
+
+# RZ WEB
+LnVmWebBL02 ansible_host=10.100.5.210
+
+# RZ DB
+LnBmSqlBl01 ansible_host=10.100.5.220
+
+# RZ-Stage
+LnVmWebBL03 ansible_host=10.100.5.129 		# Quibiq
+LnVmWebBL04 ansible_host=10.100.5.130 		# Quibiq
+
+LnVmWebBL06 ansible_host=10.100.5.101 		# Stage
+LnVmWebBL07 ansible_host=10.100.5.102 		# qa
+
+LnVmWebBL09 ansible_host=10.100.5.104 		# frontdev
+
+
+[MediaXX]
+#88.99.241.51 #media09
+94.130.38.125 #media12
+
+82.165.96.71 
+10.100.5.21
+10.100.2.230
+
+[local]
+DevLnShopVM01 ansible_host=192.168.12.200 
+
+######################
+# Production         #
+######################
+
+[1und1-prod-monitor]
+212.227.201.46
+
+# 1und1              
+
+[1und1-prod-webservers]
+LnVmWeb02
+LnVmWeb03
+LnVmWeb04
+LnVmWeb05
+LnVmWeb06
+LnVmWeb07
+LnVmWeb08
+#LnVmWeb09
+LnWebAdm01
+
+
+[1und1-prod-dbservers]
+LnBmSql01
+LnBmSql02
+LnBmSql03
+LnWebSql04
+LnWebSql05
+
+# DnsNet              
+
+[dnsnet-prod-webservers]
+DevLnVmWebBL10
+
+
+[dnsnet-prod-dbservers]
+
+
+
+# Environment  
+[productionmonitor:children]
+1und1-prod-monitor
+
+[productionwebservers:children]
+1und1-prod-webservers
+dnsnet-prod-webservers
+
+[productiondbservers:children]
+1und1-prod-dbservers
+dnsnet-prod-dbservers
+
+[production:children]
+productionwebservers
+productiondbservers
+productionmonitor
+
+
+######################
+# Stage              #
+######################
+
+[dnsnet-stage-webservers]
+LnVmWebBL06
+
+[dnsnet-stage-dbservers]
+LnVmWebBL06
+
+[stagewebservers:children]
+dnsnet-stage-webservers
+
+[stagedbservers:children]
+dnsnet-stage-dbservers
+
+[stage:children]
+stagewebservers
+stagedbservers
+
+
+######################
+# qa                 #
+######################
+
+[dnsnet-qa-webservers]
+LnVmWebBL07
+
+[dnsnet-qa-dbservers]
+LnVmWebBL07
+
+[qawebservers:children]
+dnsnet-qa-webservers
+
+[qadbservers:children]
+dnsnet-qa-dbservers
+
+[qa:children]
+qawebservers
+qadbservers
+
+######################
+# Daily              #
+######################
+
+[1und1-daily-webservers]
+LnWebDaily01
+
+[1und1-daily-dbservers]
+LnWebDaily01
+
+[dnsnet-daily-dbservers]
+LnWebApp12
+LnVmWeb13
+LnVmWeb14
+
+[dnsnet-daily-webservers]
+LnWebApp12
+LnVmWeb13
+LnVmWeb14
+
+[dailywebservers:children]
+1und1-daily-webservers
+dnsnet-daily-webservers
+
+[dailydbservers:children]
+1und1-daily-dbservers
+dnsnet-daily-dbservers
+
+[daily:children]
+dailydbservers
+dailywebservers
+
+
+######################
+# dev                #
+######################
+
+[dnsnet-dev-dbservers]
+LnVmWebBL02
+
+[dnsnet-dev-webservers]
+LnVmWebBL02
+
+[devwebservers:children]
+dnsnet-dev-webservers
+
+[devdbservers:children]
+dnsnet-dev-dbservers
+
+[dev:children]
+devdbservers
+devwebservers
+
+
+
+######################
+# qdev               #
+######################
+
+
+[dnsnet-qdev-dbservers]
+LnVmWebBL03
+
+[dnsnet-qdev-webservers]
+LnVmWebBL03
+
+[qdevwebservers:children]
+dnsnet-qdev-webservers
+
+[qdevdbservers:children]
+dnsnet-qdev-dbservers
+
+[qdev:children]
+qdevdbservers
+qdevwebservers
+
+
+
+######################
+# qstage             #
+######################
+
+[dnsnet-qstage-dbservers]
+LnVmWebBL04
+
+[dnsnet-qstage-webservers]
+LnVmWebBL04
+
+[qstagewebservers:children]
+dnsnet-qstage-webservers
+
+[qstagedbservers:children]
+dnsnet-qstage-dbservers
+
+[qstage:children]
+qstagedbservers
+qstagewebservers
+
+
+######################
+# local              #
+######################
+
+[local-dbservers]
+DevLnShopVM01
+
+[local-webservers]
+DevLnShopVM01
+
+[localwebservers:children]
+local-webservers
+
+[localdbservers:children]
+local-dbservers
+
+[local:children]
+localdbservers
+localwebservers
+
+######################
+# frontdev           #
+######################
+
+[frontdev-dbservers]
+LnVmWebBL09
+
+[frontdev-webservers]
+LnVmWebBL09
+
+[frontdevwebservers:children]
+frontdev-webservers
+
+[frontdevdbservers:children]
+frontdev-dbservers
+
+[frontdev:children]
+frontdevdbservers
+frontdevwebservers

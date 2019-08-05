@@ -1,0 +1,9 @@
+    - name: Create apache2 stats vhost
+      template:
+        src: templates/stats.elektronik-star.de.conf.j2
+        dest: /etc/awstats/awstats.{{ item.domain }}.conf
+      with_items: "{{ vhost_sites }}"               
+      notify:
+      - restart apache2
+      tags: awstats
+      

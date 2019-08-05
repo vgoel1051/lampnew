@@ -1,0 +1,29 @@
+    - name: Create apache2 admin vhosts
+      template:
+        src: templates/vhostsAdmin.conf.j2
+        dest: /etc/apache2/sites-available/{{ item['admin_domain'] }}.conf
+      with_items: "{{ malls }}"      
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_apc
+
+    - name: disable  default site
+      file:
+          path: "{{ item }}"
+          state: absent
+      with_items:
+          - /etc/apache2/sites-enabled/000-default.conf
+    
+    - name: a2ensite {{ item['admin_domain'] }}
+      command: a2ensite {{ item['admin_domain'] }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ item['admin_domain'] }}}.conf
+      with_items: "{{ malls }}"
+      notify:
+      - restart apache2
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_apc
+      

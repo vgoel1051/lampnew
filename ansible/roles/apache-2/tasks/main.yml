@@ -1,0 +1,84 @@
+---
+
+ 
+    - name: PHP | Install Ondrej PHP PPA
+      apt_repository: repo='ppa:ondrej/php' update_cache=yes
+
+
+    - name: install software-properties-common
+      apt: name=software-properties-common update_cache=yes state=latest
+      tags: apache2
+
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+      tags: apache2
+
+    - name: activate apache2 module
+      apache2_module:
+        state: present
+        name: "{{item}}"
+      notify:
+        - restart apache2
+      with_items: 
+        - setenvif
+        - rewrite
+        - ssl    
+        - expires
+        - headers 
+        - rewrite    
+      tags: apache2
+
+    - name: apache2 listen on port {{ http_port }}
+      lineinfile: dest=/etc/apache2/ports.conf regexp="^Listen " line="Listen {{ http_port }}" state=present
+      notify:
+        - restart apache2
+      tags: apache2
+      
+    - name: Create apache2 vhosts
+      template:
+        src: templates/vhosts.conf.j2
+        dest: /etc/apache2/sites-available/{{ subdomain }}.{{ item['domain'] }}.conf
+      with_items: "{{ vhost_sites }}"      
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_shops    
+            
+    - name: a2ensite {{ subdomain }}.{{ item['domain'] }}
+      command: a2ensite {{ subdomain }}.{{ item['domain'] }}
+      args:
+        creates: /etc/apache2/sites-enabled/{{ subdomain }}.{{ item['domain'] }}.conf
+      with_items: "{{ vhost_sites }}"
+      notify:
+      - restart apache2  
+      tags: 
+      - apache2
+      - apache2_vhosts    
+      - apache2_vhosts_shops       
+      
+    - name: Create auth_users
+      template:
+        src: templates/auth_users.j2
+        dest: /etc/apache2/auth_users
+        owner: root
+        group: root
+        mode: 0644         
+      tags: 
+      - awstats
+
+    - name: Create sqlDumps directory
+      file:
+        path: /var/www/malls/{{ stage }}/sqlDumps
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+        recurse: yes
+      with_items: "{{ malls }}"
+      tags: apache2
+
+    - include: copyCerts.yml
+    - include: shopadmin.yml
+    - include: erpcon.yml      
+    - include: preforkConf.yml
+    - include: shopMitarbeiter.yml

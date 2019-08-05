@@ -1,0 +1,111 @@
+---
+# sftp_users:
+#   - username: foobar
+#     name: Foo Bar
+#     # openssl passwd -salt 'somesalt' -1 'secret'
+#     password: '$1$somesalt$jezmI5TSY7mVTzHLgsK5L.'
+#     authorized_keys: []
+#     home: /home
+#     group: ftp
+#     groups:
+#       - staff
+#       - www-data
+#     mount_points:
+#       - { name: foo, path: /path/to/foo }
+#
+
+# list of sftp users
+sftp_users:   
+
+   - username: chaltecwebauna
+     name: chaltecwebauna    
+     password: '$1$somesalt$NngVsx3qI3/5hq04Jmih9.'
+     authorized_keys: []
+     home: /home/chaltecwebauna
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points: []
+#       - {name: "htdocs_malls", path: "/var/www/malls/{{ stage }}/estar/htdocs/out/media"}
+      
+   - username: estar-sftp
+     name: estar-sftp    
+     password: '$1$somesalt$TpjHsNy5J9hOnzASFeyJ71'
+     authorized_keys: []
+     home: /home/estar-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points: 
+       - {name: "media_estar", path: "/var/www/malls/{{ stage }}/estar/htdocs/out/media"}
+      
+
+   - username: chaltecweb
+     name: chaltecweb    
+     password: '$1$somesalt$NngVsx3qI3/5hq04Jmih9.'
+     authorized_keys: []
+     home: /home/chaltecweb
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "htdocs_malls", path: "/var/www/malls/{{ stage }}"}
+       
+   - username: skmall_sftp
+     name: skmall_sftp    
+     password: '$1$somesalt$HrE66nnjtxl34zbCFMBaQ1'
+     authorized_keys: []
+     home: /home/skmall_sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "media_sk", path: "/var/www/malls/{{ stage }}/sk/htdocs/out/media"}
+     
+   - username: klarstein-sftp
+     name: klarstein-sftp    
+     password: '$1$somesalt$zH02zoQ9HpIhVvzYLbJZF1'
+     authorized_keys: []
+     home: /home/klarstein-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "media_klarstein", path: "/var/www/malls/{{ stage }}/klarstein/htdocs/out/media"}
+  
+   - username: auna-sftp
+     name: auna-sftp
+     password: '$1$somesalt$RaaelHIyZB0k/zY.ZUR6k.'
+     authorized_keys: []
+     home: /home/auna-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "media_auna", path: "/var/www/malls/{{ stage }}/auna/htdocs/out/media"}
+
+   - username: chaltecblumfeldt_sftp
+     name: chaltecblumfeldt_sftp    
+     password: '$1$somesalt$RaaelHIyZB0k/zY.ZUR6k.'
+     authorized_keys: []
+     home: /home/blumfeldt-sftp
+     group: ftp
+     groups:
+       - staff
+       - www-data
+     mount_points:
+       - {name: "media_blumfeldt", path: "/var/www/malls/{{ stage }}/blumfeldt/htdocs/out/media"}
+        
+sftp_users_group: ftp
+# default user groups
+sftp_users_groups: []
+# users home directory
+sftp_users_home: /home
+# list of user writeable folders
+sftp_users_folders: ['files']

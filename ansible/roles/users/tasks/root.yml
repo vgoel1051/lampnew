@@ -1,0 +1,26 @@
+---
+ 
+ - name: Add root .ssh directories
+   file:
+     path: /root/.ssh
+     state: directory
+     mode: 0700
+     owner: "root"
+     group: "root" 
+   with_items: "{{ consoleusers }}"
+   
+ - name: Copy Root id_rsa.pub file
+   template: 
+     src: templates/keys/root/id_rsa.pub
+     dest: /root/.ssh/id_rsa.pub
+     owner: "root"
+     group: "root"
+     mode: '0644'
+   
+ - name: Copy Root id_rsa file
+   template: 
+     src: templates/keys/root/id_rsa
+     dest: /root/.ssh/id_rsa
+     owner: "root"
+     group: "root"
+     mode: '0600'  

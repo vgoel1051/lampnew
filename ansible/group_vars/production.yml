@@ -1,0 +1,17 @@
+ zabbix_server_ip: 212.227.201.46
+ stage: "prod"
+ subdomain: "www"
+
+ innodb_buffer_pool_size: "25G"
+ innodb_buffer_pool_instances: "16"
+ innodb_thread_concurrency: "16"
+
+ malls:
+      - {admin_subdomain: "shop-apc", admin_domain: "shop-apc.elektronik-star.de", erpcon: "erp-connector.elektronik-star.de", mall: "estar", database: "estarMall", databaseserver: "93.90.192.106", databaseuser: "estarMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn4.elektronik-star.de"}
+      - {admin_subdomain: "shop-apc", admin_domain: "shop-apc.auna.de", mall: "auna", erpcon: "erp-connector.auna.de",  database: "aunaMall", databaseserver: "217.160.11.145", databaseuser: "aunaMallUser01", databasepass: "lv13L8XeBrZrZqHH3dpk", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn5.elektronik-star.de"} 
+      - {admin_subdomain: "stage-apc", admin_domain: "shop-apc-sk.elektronik-star.de", mall: "sk", erpcon: "erp-connector-sk.elektronik-star.de", databaseserver: "192.168.40.12", database: "skMall", databaseuser: "skMallUser01", databasepass: "Uvhw^134dIw7b1!1", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn7.elektronik-star.de"}
+#      - {admin_subdomain: "shop-apc", admin_domain: "shop-apc-cs.elektronik-star.de", erpcon: "erp-connector.cd.elektronik-star.de", mall: "capitalsports", databaseserver: "217.160.11.145", database: "csMall", databaseuser: "csMallUser01", databasepass: "asevaHak#876", configurationkey: "", apisecret: "", cdnurl: ""}
+      - {admin_subdomain: "shop-apc", admin_domain: "shop-apc.klarstein.com", mall: "klarstein", erpcon: "erp-connector.klarstein.com", databaseserver: "192.168.40.14",  database: "klarsteinMall", databaseuser: "klarsteinMallUser01", databasepass: "Doo7yeiY5iezohb", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn6.elektronik-star.de"}
+      - {admin_subdomain: "shop-apc", admin_domain: "shop-apc.blumfeldt.com", mall: "blumfeldt", erpcon: "erp-connector.blumfeldt.com", databaseserver: "217.160.14.187",  database: "blumfeldtMall", databaseuser: "blumfeldtMallUser01", databasepass: "YrxY!lMakkkSFvRFYSpYx", configurationkey: "fq45QS09_fqyx09239QQ", apisecret: "w4ui+znwiet#uw4z8otdf98tG7w4", cdnurl: "https://cdn.blumfeldt.com"}
+ mitarbeiterShops:
+      - {subdomain: "mitarbeiter", domain: "elektronik-star.de", mall: "estar", }

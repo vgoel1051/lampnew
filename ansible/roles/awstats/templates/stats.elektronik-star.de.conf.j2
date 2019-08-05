@@ -1,0 +1,5 @@
+Include "/etc/awstats/awstats.conf"
+SiteDomain="{{ item.domain }}"
+HostAliases="{{ item.domain }}"
+DirData="/var/lib/awstats/{{ item.domain }}"
+LogFile="/var/log/apache2/{{ item.domain }}_access.log"
